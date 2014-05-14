@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RussianRouletteServiceLibrary", "RussianRouletteServiceLibrary\RussianRouletteServiceLibrary.csproj", "{9933DF65-B071-4135-9BA6-235A9B3757BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RussianRouletteUnitTest", "RussianRouletteUnitTest\RussianRouletteUnitTest.csproj", "{5FD5A566-0905-4641-BB30-36BE3F73C572}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9933DF65-B071-4135-9BA6-235A9B3757BE} = {9933DF65-B071-4135-9BA6-235A9B3757BE}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9933DF65-B071-4135-9BA6-235A9B3757BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9933DF65-B071-4135-9BA6-235A9B3757BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9933DF65-B071-4135-9BA6-235A9B3757BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9933DF65-B071-4135-9BA6-235A9B3757BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD5A566-0905-4641-BB30-36BE3F73C572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD5A566-0905-4641-BB30-36BE3F73C572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD5A566-0905-4641-BB30-36BE3F73C572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD5A566-0905-4641-BB30-36BE3F73C572}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

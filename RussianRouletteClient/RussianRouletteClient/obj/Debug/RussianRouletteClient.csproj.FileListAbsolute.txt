@@ -1,0 +1,10 @@
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\bin\Debug\RussianRouletteClient.exe.config
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.csprojResolveAssemblyReference.cache
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.Properties.Resources.resources
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.csproj.GenerateResource.Cache
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\bin\Debug\RussianRouletteClient.exe
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\bin\Debug\RussianRouletteClient.pdb
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.exe
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.pdb
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.PortalForm.resources
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.StartForm.resources

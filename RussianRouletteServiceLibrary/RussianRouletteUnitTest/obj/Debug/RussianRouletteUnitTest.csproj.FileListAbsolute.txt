@@ -1,0 +1,6 @@
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\bin\Debug\RussianRouletteUnitTest.dll
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\bin\Debug\RussianRouletteUnitTest.pdb
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\obj\Debug\RussianRouletteUnitTest.csprojResolveAssemblyReference.cache
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\obj\Debug\RussianRouletteUnitTest.dll
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\obj\Debug\RussianRouletteUnitTest.pdb
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\bin\Debug\RussianRouletteUnitTest.dll.config

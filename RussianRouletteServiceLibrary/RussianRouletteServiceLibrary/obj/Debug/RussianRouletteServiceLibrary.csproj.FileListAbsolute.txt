@@ -1,0 +1,13 @@
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\Data\ServiceDB.mdf
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.dll.config
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.dll
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.pdb
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.dll
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.xml
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.csprojResolveAssemblyReference.cache
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.dll
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.pdb
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\ServiceDB.mdf
+c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\ServiceDB_log.ldf

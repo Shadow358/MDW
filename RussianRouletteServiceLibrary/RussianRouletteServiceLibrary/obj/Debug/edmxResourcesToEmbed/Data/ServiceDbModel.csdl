@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ServiceDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ServiceContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UMessages" EntityType="ServiceDBModel.UMessage" />
+    <EntitySet Name="Users" EntityType="ServiceDBModel.User" />
+    <AssociationSet Name="FK__UMessages__Sende__36B12243" Association="ServiceDBModel.FK__UMessages__Sende__36B12243">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UMessage" EntitySet="UMessages" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="SenderId" Type="Int32" />
+    <Property Name="TimeSent" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MessageContent" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="ServiceDBModel.FK__UMessages__Sende__36B12243" FromRole="UMessage" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NickName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UMessages" Relationship="ServiceDBModel.FK__UMessages__Sende__36B12243" FromRole="User" ToRole="UMessage" />
+  </EntityType>
+  <Association Name="FK__UMessages__Sende__36B12243">
+    <End Type="ServiceDBModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="ServiceDBModel.UMessage" Role="UMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UMessage">
+        <PropertyRef Name="SenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
