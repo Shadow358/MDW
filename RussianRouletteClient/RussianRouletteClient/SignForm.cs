@@ -15,41 +15,42 @@ namespace RussianRouletteClient
 
 
      [CallbackBehavior(
-        ConcurrencyMode = ConcurrencyMode.Single,
+        ConcurrencyMode = ConcurrencyMode.Reentrant,
         UseSynchronizationContext = false)]
     public partial class StartForm : Form, IPortalCallback
-    {        
-            #region IPortal callbacks
-            //public void OnUserSignIn(User user, UMessage message)
-            //{
-            //    MessageBox.Show("User " + user.NickName + " has signed in.");
-            //}
-            //public void OnUserSignOut(User user)
-            //{
+    {
+        #region IPortal callbacks
+        public void OnUserSignIn(User user, UMessage message)
+        {
+            MessageBox.Show("User " + user.NickName + " has signed in.");
+        }
+        public void OnUserSignOut(User user, UMessage message)
+        {
 
-            //}
+        }
 
-            //public void OnPublicMessageSent(User user, UMessage message)
-            //{
+        public void OnInvitedToPlay(User user)
+        {
 
-            //}
+        }
 
-            //public void OnPrivateMessageSent(User user, UMessage message)
-            //{
+        public void OnPublicMessageSent(User user, UMessage message)
+        {
 
-            //}
-            public void OnUserLogin(int numeris)
-            {
-                MessageBox.Show(numeris.ToString());
-            }
-            #endregion
+        }
+
+        public void OnPrivateMessageSent(User user, UMessage message)
+        {
+
+        }
+        #endregion
         
 
        private GameClient _gameClient = null;
        private PortalClient _portalClient = null;
        private InstanceContext _instance = null;
        public string message = null;
-
+         
         public StartForm()
        {
                _instance = new InstanceContext(this);

@@ -297,11 +297,11 @@ namespace RussianRouletteClient.RussianRouletteService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/SendMessage", ReplyAction="http://tempuri.org/IGame/SendMessageResponse")]
         System.Threading.Tasks.Task SendMessageAsync(RussianRouletteClient.RussianRouletteService.UMessage message);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DetermineWinnder", ReplyAction="http://tempuri.org/IGame/DetermineWinnderResponse")]
-        string DetermineWinnder();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DetermineWinner", ReplyAction="http://tempuri.org/IGame/DetermineWinnerResponse")]
+        string DetermineWinner();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DetermineWinnder", ReplyAction="http://tempuri.org/IGame/DetermineWinnderResponse")]
-        System.Threading.Tasks.Task<string> DetermineWinnderAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DetermineWinner", ReplyAction="http://tempuri.org/IGame/DetermineWinnerResponse")]
+        System.Threading.Tasks.Task<string> DetermineWinnerAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Rematch", ReplyAction="http://tempuri.org/IGame/RematchResponse")]
         string Rematch();
@@ -315,6 +315,15 @@ namespace RussianRouletteClient.RussianRouletteService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayerSentMessage")]
         void PlayerSentMessage();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayerDisconnected")]
+        void PlayerDisconnected();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayerReady")]
+        void PlayerReady();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayerLost")]
+        void PlayerLost();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -385,12 +394,12 @@ namespace RussianRouletteClient.RussianRouletteService {
             return base.Channel.SendMessageAsync(message);
         }
         
-        public string DetermineWinnder() {
-            return base.Channel.DetermineWinnder();
+        public string DetermineWinner() {
+            return base.Channel.DetermineWinner();
         }
         
-        public System.Threading.Tasks.Task<string> DetermineWinnderAsync() {
-            return base.Channel.DetermineWinnderAsync();
+        public System.Threading.Tasks.Task<string> DetermineWinnerAsync() {
+            return base.Channel.DetermineWinnerAsync();
         }
         
         public string Rematch() {
@@ -446,8 +455,20 @@ namespace RussianRouletteClient.RussianRouletteService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IPortalCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnUserLogin")]
-        void OnUserLogin(int numeris);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnUserSignIn")]
+        void OnUserSignIn(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnUserSignOut")]
+        void OnUserSignOut(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnPublicMessageSent")]
+        void OnPublicMessageSent(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnPrivateMessageSent")]
+        void OnPrivateMessageSent(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnInvitedToPlay")]
+        void OnInvitedToPlay(RussianRouletteClient.RussianRouletteService.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

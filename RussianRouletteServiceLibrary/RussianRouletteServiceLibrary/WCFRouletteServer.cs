@@ -11,8 +11,10 @@ using RussianRouletteServiceLibrary.Data;
 
 namespace RussianRouletteServiceLibrary
 {
-    [CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Single, UseSynchronizationContext=false)]
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.PerCall)]
+    //[CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Single, UseSynchronizationContext=false)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
+                     ConcurrencyMode = ConcurrencyMode.Reentrant,
+                     UseSynchronizationContext = false)]
     public class WCFRouletteServer : IGame, IPortal
     {
         //Database object
@@ -21,6 +23,7 @@ namespace RussianRouletteServiceLibrary
         //Event actions
         //static Action<User, UMessage> m_PortalEvents = delegate {};
         static Action<int> m_PortalTest = delegate { };
+        static Action<User, UMessage> m_Portal = delegate { };
 
         public WCFRouletteServer()
         {
@@ -52,7 +55,7 @@ namespace RussianRouletteServiceLibrary
         {
         }
 
-        public string DetermineWinnder()
+        public string DetermineWinner()
         {
             throw new NotImplementedException();
         }
@@ -99,9 +102,9 @@ namespace RussianRouletteServiceLibrary
                     //m_PortalEvents += subscriber.OnUserSignIn;
                     //m_PortalEvents += subscriber.OnPublicMessageSent;
 
-                    m_PortalTest += subscriber.OnUserLogin;
-
-                    m_PortalTest(577);
+                    m_Portal += subscriber.OnUserSignIn;
+                    m_Portal += subscriber.OnUserSignOut;
+                    m_Portal += subscriber.OnPublicMessageSent;
 
                     //m_PortalEvents(user, new UMessage() { MessageContent = "User :: "+user.NickName+" has signed in", TimeSent = DateTime.Now});
                     return true;

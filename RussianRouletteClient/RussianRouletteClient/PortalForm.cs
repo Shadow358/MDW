@@ -17,10 +17,14 @@ namespace RussianRouletteClient
         #region IPortal callbacks
         public void OnUserSignIn(User user, UMessage message)
         {
-            
             MessageBox.Show("User " + user.NickName + " has signed in.");
         }
-        public void OnUserSignOut(User user)
+        public void OnUserSignOut(User user, UMessage message)
+        {
+
+        }
+
+        public void OnInvitedToPlay(User user)
         {
 
         }
@@ -33,10 +37,6 @@ namespace RussianRouletteClient
         public void OnPrivateMessageSent(User user, UMessage message)
         {
 
-        }
-        public void OnUserLogin(int numeris)
-        {
-            MessageBox.Show(numeris.ToString());
         }
         #endregion
 

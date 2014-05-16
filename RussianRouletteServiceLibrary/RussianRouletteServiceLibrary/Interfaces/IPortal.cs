@@ -16,7 +16,9 @@ namespace RussianRouletteServiceLibrary.Interfaces
 
     }
 
-    [ServiceContract(SessionMode=SessionMode.Required, CallbackContract=typeof(IPortalCallback))]
+    [ServiceContract(
+    SessionMode = SessionMode.Required,
+    CallbackContract = typeof(IPortalCallback))]
     public interface IPortal
     {
         [OperationContract]
@@ -40,20 +42,19 @@ namespace RussianRouletteServiceLibrary.Interfaces
 
     public interface IPortalCallback
     {
-        //[OperationContract]
-        //void OnUserSignIn(User user, UMessage message);
+        [OperationContract(IsOneWay = true)]
+        void OnUserSignIn(User user, UMessage message);
 
-        //[OperationContract]
-        //void OnUserSignOut(User user);
+        [OperationContract(IsOneWay = true)]
+        void OnUserSignOut(User user, UMessage message);
 
-        //[OperationContract]
-        //void OnPublicMessageSent(User user, UMessage message);
+        [OperationContract(IsOneWay = true)]
+        void OnPublicMessageSent(User user, UMessage message);
 
-        //[OperationContract]
-        //void OnPrivateMessageSent(User user, UMessage message);
+        [OperationContract(IsOneWay = true)]
+        void OnPrivateMessageSent(User user, UMessage message);
 
         [OperationContract(IsOneWay=true)]
-        void OnUserLogin(int numeris);
-
+        void OnInvitedToPlay(User user);
     }
 }

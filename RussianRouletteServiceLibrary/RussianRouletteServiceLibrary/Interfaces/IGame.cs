@@ -48,7 +48,7 @@ namespace RussianRouletteServiceLibrary.Interfaces
         void SendMessage(UMessage message);
 
         [OperationContract]
-        string DetermineWinnder();
+        string DetermineWinner();
 
         [OperationContract]
         string Rematch();
@@ -59,10 +59,13 @@ namespace RussianRouletteServiceLibrary.Interfaces
         [OperationContract(IsOneWay = true)]
         void PlayerSentMessage();
 
+        [OperationContract(IsOneWay = true)]
         void PlayerDisconnected();
 
+        [OperationContract(IsOneWay = true)]
         void PlayerReady();
 
+        [OperationContract(IsOneWay = true)]
         void PlayerLost();
     }
 
