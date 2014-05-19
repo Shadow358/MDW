@@ -12,6 +12,7 @@ using System.ServiceModel;
 
 namespace RussianRouletteClient
 {
+
     [CallbackBehavior(
         ConcurrencyMode = ConcurrencyMode.Reentrant,
         UseSynchronizationContext = false)]
@@ -20,7 +21,10 @@ namespace RussianRouletteClient
         #region IGame Callbacks
         public void PlayerSentMessage(User user, UMessage message)
         {
-            lb_ChatBox.Items.Add("[" + message.TimeSent + "] " + user.NickName + " : " + message.MessageContent);
+            this.Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add(user.NickName + " : " + message.MessageContent)));
+            //RetrieveMsg(user, message);
+            //MessageBox.Show(user.NickName + " sent a message: " +message.MessageContent);
+            //lb_ChatBox.Items.Add("[" + message.TimeSent + "] " + user.NickName + " : " + message.MessageContent);
         }
 
         public void PlayerDisconnected()
@@ -49,7 +53,17 @@ namespace RussianRouletteClient
         {
             _gameClient = new GameClient(new InstanceContext(this));
             InitializeComponent();
-            _gameClient.Open();
+
+            try
+            {
+                _gameClient.Open();
+                _gameClient.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+           
         }
 
         private void btn_Spin_Click(object sender, EventArgs e)
@@ -59,7 +73,7 @@ namespace RussianRouletteClient
 
         private void btn_Play_Click(object sender, EventArgs e)
         {
-            _gameClient.Play();
+            
         }
 
         private void btn_Rematch_Click(object sender, EventArgs e)
