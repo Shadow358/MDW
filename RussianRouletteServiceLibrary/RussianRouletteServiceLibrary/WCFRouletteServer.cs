@@ -25,6 +25,8 @@ namespace RussianRouletteServiceLibrary
         static Action<int> m_PortalTest = delegate { };
         static Action<User, UMessage> m_Portal = delegate { };
 
+        private static Action<User, UMessage> gameChat = delegate { };
+
         public WCFRouletteServer()
         {
 
@@ -32,7 +34,9 @@ namespace RussianRouletteServiceLibrary
 
         public void Play()
         {
-            throw new NotImplementedException();
+            IGameCallback subscriber =
+                       OperationContext.Current.GetCallbackChannel<IGameCallback>();
+            gameChat += subscriber.PlayerSentMessage;
         }
 
         public string PlaceBullet(int cylinderHole)
@@ -51,8 +55,9 @@ namespace RussianRouletteServiceLibrary
         }
 
         //sends message in game.
-        public void SendMessage(UMessage message)
+        public void SendMessage(User user, UMessage message)
         {
+            gameChat(user, message);
         }
 
         public string DetermineWinner()

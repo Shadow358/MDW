@@ -33,7 +33,7 @@
             this.btn_Play = new System.Windows.Forms.Button();
             this.btn_Rematch = new System.Windows.Forms.Button();
             this.btn_Fire = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_GameChat = new System.Windows.Forms.TextBox();
             this.lb_ChatBox = new System.Windows.Forms.ListBox();
             this.btn_SendMessage = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -87,12 +87,12 @@
             this.btn_Fire.UseVisualStyleBackColor = true;
             this.btn_Fire.Click += new System.EventHandler(this.btn_Fire_Click);
             // 
-            // textBox1
+            // tb_GameChat
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 487);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(459, 20);
-            this.textBox1.TabIndex = 5;
+            this.tb_GameChat.Location = new System.Drawing.Point(12, 487);
+            this.tb_GameChat.Name = "tb_GameChat";
+            this.tb_GameChat.Size = new System.Drawing.Size(459, 20);
+            this.tb_GameChat.TabIndex = 5;
             // 
             // lb_ChatBox
             // 
@@ -119,7 +119,7 @@
             this.ClientSize = new System.Drawing.Size(600, 519);
             this.Controls.Add(this.btn_SendMessage);
             this.Controls.Add(this.lb_ChatBox);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tb_GameChat);
             this.Controls.Add(this.btn_Fire);
             this.Controls.Add(this.btn_Rematch);
             this.Controls.Add(this.btn_Play);
@@ -139,7 +139,7 @@
         private System.Windows.Forms.Button btn_Play;
         private System.Windows.Forms.Button btn_Rematch;
         private System.Windows.Forms.Button btn_Fire;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_GameChat;
         private System.Windows.Forms.ListBox lb_ChatBox;
         private System.Windows.Forms.Button btn_SendMessage;
     }

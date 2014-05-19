@@ -310,29 +310,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_SendMessage_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
-          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="WSDualHttpBinding_IGame_DetermineWinner_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -1013,9 +990,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" />
+      <xsd:import schemaLocation="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGame_Play_InputMessage">
@@ -1044,9 +1021,6 @@
   </wsdl:message>
   <wsdl:message name="IGame_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
-  </wsdl:message>
-  <wsdl:message name="IGame_SendMessage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
   </wsdl:message>
   <wsdl:message name="IGame_DetermineWinner_InputMessage">
     <wsdl:part name="parameters" element="tns:DetermineWinner" />
@@ -1142,7 +1116,6 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/SendMessage" message="tns:IGame_SendMessage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGame/SendMessageResponse" message="tns:IGame_SendMessage_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DetermineWinner">
       <wsdl:input wsaw:Action="http://tempuri.org/IGame/DetermineWinner" message="tns:IGame_DetermineWinner_InputMessage" />
@@ -1259,10 +1232,6 @@
         <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_SendMessage_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IGame_SendMessage_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="DetermineWinner">
       <soap12:operation soapAction="http://tempuri.org/IGame/DetermineWinner" style="document" />
@@ -1422,18 +1391,18 @@
   </wsdl:binding>
   <wsdl:service name="WCFRouletteServer">
     <wsdl:port name="WSDualHttpBinding_IGame" binding="tns:WSDualHttpBinding_IGame">
-      <soap12:address location="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" />
+      <soap12:address location="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/</wsa10:Address>
+        <wsa10:Address>http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="WSDualHttpBinding_IPortal" binding="tns:WSDualHttpBinding_IPortal">
-      <soap12:address location="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" />
+      <soap12:address location="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/</wsa10:Address>
+        <wsa10:Address>http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="opCiW3VE10RgEUVmlNC7TXfqV54=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="nlWy6sMfhM5MY05gQaF1MoSQfEE=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="wsDualHttpBinding" name="WSDualHttpBinding_IGame">
       <properties>
@@ -191,10 +191,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WSDualHttpBinding_IGame" contract="RussianRouletteService.IGame" bindingType="wsDualHttpBinding" address="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" bindingConfiguration="WSDualHttpBinding_IGame">
+    <endpoint name="WSDualHttpBinding_IGame" contract="RussianRouletteService.IGame" bindingType="wsDualHttpBinding" address="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" bindingConfiguration="WSDualHttpBinding_IGame">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/</serializedValue>
+          <serializedValue>http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -276,10 +276,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="WSDualHttpBinding_IPortal" contract="RussianRouletteService.IPortal" bindingType="wsDualHttpBinding" address="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" bindingConfiguration="WSDualHttpBinding_IPortal">
+    <endpoint name="WSDualHttpBinding_IPortal" contract="RussianRouletteService.IPortal" bindingType="wsDualHttpBinding" address="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" bindingConfiguration="WSDualHttpBinding_IPortal">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/</serializedValue>
+          <serializedValue>http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

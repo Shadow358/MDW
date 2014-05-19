@@ -44,8 +44,8 @@ namespace RussianRouletteServiceLibrary.Interfaces
         [OperationContract]
         bool Shoot(User player);
 
-        [OperationContract]
-        void SendMessage(UMessage message);
+        [OperationContract(IsOneWay = true)]
+        void SendMessage(User user,UMessage message);
 
         [OperationContract]
         string DetermineWinner();
@@ -57,7 +57,7 @@ namespace RussianRouletteServiceLibrary.Interfaces
     public interface IGameCallback
     {
         [OperationContract(IsOneWay = true)]
-        void PlayerSentMessage();
+        void PlayerSentMessage(User user, UMessage message);
 
         [OperationContract(IsOneWay = true)]
         void PlayerDisconnected();

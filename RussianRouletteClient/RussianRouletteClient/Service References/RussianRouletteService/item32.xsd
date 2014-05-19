@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" />
+  <xs:import schemaLocation="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" />
   <xs:element name="Play">
     <xs:complexType>
       <xs:sequence />
@@ -54,13 +54,9 @@
   <xs:element name="SendMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q2:UMessage" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q2:User" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q3:UMessage" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SendMessageResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="DetermineWinner">
@@ -89,7 +85,10 @@
   </xs:element>
   <xs:element name="PlayerSentMessage">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q4:User" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q5:UMessage" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PlayerDisconnected">
@@ -110,7 +109,7 @@
   <xs:element name="SignUp">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q3:User" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q6:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -124,7 +123,7 @@
   <xs:element name="SignIn">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q4:User" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q7:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -138,7 +137,7 @@
   <xs:element name="SendPublicMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q5:UMessage" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q8:UMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -150,8 +149,8 @@
   <xs:element name="SendPrivateMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q6:User" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q7:UMessage" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q9:User" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q10:UMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -163,7 +162,7 @@
   <xs:element name="InviteToPlay">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q8:User" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q11:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -185,39 +184,39 @@
   <xs:element name="OnUserSignIn">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q9:User" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q10:UMessage" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q12:User" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q13:UMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnUserSignOut">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q11:User" />
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q12:UMessage" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q14:User" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q15:UMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnPublicMessageSent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q13:User" />
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q14:UMessage" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q16:User" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q17:UMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnPrivateMessageSent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q15:User" />
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q16:UMessage" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q18:User" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="message" nillable="true" type="q19:UMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnInvitedToPlay">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q17:User" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data" minOccurs="0" name="user" nillable="true" type="q20:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

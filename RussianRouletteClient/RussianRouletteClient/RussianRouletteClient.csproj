@@ -101,16 +101,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\RussianRouletteService\item.xsd">
+    <None Include="Service References\RussianRouletteService\item31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\RussianRouletteService\item1.xsd">
+    <None Include="Service References\RussianRouletteService\item32.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\RussianRouletteService\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\RussianRouletteService\WCFRouletteServer.wsdl" />
+    <None Include="Service References\RussianRouletteService\WCFRouletteServer1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -119,19 +116,22 @@
     <WCFMetadataStorage Include="Service References\RussianRouletteService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\RussianRouletteService\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\RussianRouletteService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\RussianRouletteService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\RussianRouletteService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\RussianRouletteService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\RussianRouletteService\item1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
