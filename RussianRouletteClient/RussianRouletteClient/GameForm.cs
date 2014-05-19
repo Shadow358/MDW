@@ -14,14 +14,15 @@ namespace RussianRouletteClient
 {
 
     [CallbackBehavior(
-        ConcurrencyMode = ConcurrencyMode.Reentrant,
+        ConcurrencyMode = ConcurrencyMode.Multiple,
         UseSynchronizationContext = false)]
     public partial class GameForm : Form, IGameCallback
     {
         #region IGame Callbacks
         public void PlayerSentMessage(User user, UMessage message)
         {
-            this.Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add(user.NickName + " : " + message.MessageContent)));
+            string nickname = user.NickName == clientUser.NickName ? "You" : user.NickName;
+            this.Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add(nickname + " : " + message.MessageContent)));
             //RetrieveMsg(user, message);
             //MessageBox.Show(user.NickName + " sent a message: " +message.MessageContent);
             //lb_ChatBox.Items.Add("[" + message.TimeSent + "] " + user.NickName + " : " + message.MessageContent);
@@ -49,9 +50,27 @@ namespace RussianRouletteClient
         private InstanceContext _instance = null;
         private User clientUser = new User(){ Email = "zigm4s@gmail.com", Id = 0, FirstName = "Zigmas", LastName = "Slusnys", NickName = "Ziggy", Password = "test123"};
 
+
+
+
         public GameForm()
         {
-            _gameClient = new GameClient(new InstanceContext(this));
+            string state;
+
+            
+            if (_gameClient != null)
+            {
+                MessageBox.Show("nelygu null");
+                MessageBox.Show(_gameClient.State.ToString());
+                //_gameClient = new GameClient(new InstanceContext(this));
+            }
+            else
+            {
+
+                _gameClient = new GameClient(new InstanceContext(this));
+                MessageBox.Show(_gameClient.State.ToString());
+            }
+
             InitializeComponent();
 
             try
@@ -88,7 +107,39 @@ namespace RussianRouletteClient
 
         private void btn_SendMessage_Click(object sender, EventArgs e)
         {
-            _gameClient.SendMessage(this.clientUser,new UMessage() { MessageContent = tb_GameChat.Text, TimeSent = DateTime.Now, SenderId = clientUser.Id});
+            try
+            {
+                _gameClient.SendMessage(this.clientUser,
+                    new UMessage()
+                    {
+                        MessageContent = tb_GameChat.Text,
+                        TimeSent = DateTime.Now,
+                        SenderId = clientUser.Id
+                    });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try {
+                if (_gameClient.State != System.ServiceModel.CommunicationState.Faulted)
+                {
+                    MessageBox.Show("Closing client");
+                    _gameClient.ChannelFactory.Close();
+                    _gameClient.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Aborting client");
+                    _gameClient.Abort();
+                }
+                }
+            catch(Exception ex)
+            { MessageBox.Show(ex.ToString());}
         }
 
 

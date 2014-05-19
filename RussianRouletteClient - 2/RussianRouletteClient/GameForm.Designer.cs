@@ -127,6 +127,7 @@
             this.Controls.Add(this.gb_Game);
             this.Name = "GameForm";
             this.Text = "GameForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

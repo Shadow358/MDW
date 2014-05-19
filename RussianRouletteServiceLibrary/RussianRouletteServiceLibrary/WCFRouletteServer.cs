@@ -13,23 +13,24 @@ namespace RussianRouletteServiceLibrary
 {
     //[CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Single, UseSynchronizationContext=false)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
-                     ConcurrencyMode = ConcurrencyMode.Reentrant,
+                     ConcurrencyMode = ConcurrencyMode.Multiple,
                      UseSynchronizationContext = false)]
-    public class WCFRouletteServer : IGame, IPortal
+    public class WCFRouletteServer : IGame, IPortal, IDisposable
     {
         //Database object
         ServiceContext db = new ServiceContext();
 
+
         //Event actions
         //static Action<User, UMessage> m_PortalEvents = delegate {};
-        static Action<int> m_PortalTest = delegate { };
-        static Action<User, UMessage> m_Portal = delegate { };
+        //static Action<int> m_PortalTest = delegate { };
+        //static Action<User, UMessage> m_Portal = delegate { };
 
         private static Action<User, UMessage> gameChat = delegate { };
 
         public WCFRouletteServer()
         {
-
+            
         }
 
         public void Play()
@@ -57,7 +58,14 @@ namespace RussianRouletteServiceLibrary
         //sends message in game.
         public void SendMessage(User user, UMessage message)
         {
-            gameChat(user, message);
+            try
+            {
+                gameChat(user, message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public string DetermineWinner()
@@ -107,9 +115,9 @@ namespace RussianRouletteServiceLibrary
                     //m_PortalEvents += subscriber.OnUserSignIn;
                     //m_PortalEvents += subscriber.OnPublicMessageSent;
 
-                    m_Portal += subscriber.OnUserSignIn;
-                    m_Portal += subscriber.OnUserSignOut;
-                    m_Portal += subscriber.OnPublicMessageSent;
+                    //m_Portal += subscriber.OnUserSignIn;
+                    //m_Portal += subscriber.OnUserSignOut;
+                    //m_Portal += subscriber.OnPublicMessageSent;
 
                     //m_PortalEvents(user, new UMessage() { MessageContent = "User :: "+user.NickName+" has signed in", TimeSent = DateTime.Now});
                     return true;
@@ -148,5 +156,9 @@ namespace RussianRouletteServiceLibrary
         }
 
 
+        public void Dispose()
+        {
+            db.Dispose();
+        }
     }
 }

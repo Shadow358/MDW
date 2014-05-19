@@ -20,7 +20,9 @@ namespace RussianRouletteClient
         #region IGame Callbacks
         public void PlayerSentMessage(User user, UMessage message)
         {
-            this.Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add(user.NickName + " : " + message.MessageContent)));
+            
+            string nickname = user.NickName == clientUser.NickName ? "You" : user.NickName;
+            this.Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add(nickname + " : " + message.MessageContent)));
         }
 
         public void PlayerDisconnected()
@@ -49,7 +51,15 @@ namespace RussianRouletteClient
         {
             _gameClient = new GameClient(new InstanceContext(this));
             InitializeComponent();
-            _gameClient.Open();
+            try
+            {
+                _gameClient.Open();
+                _gameClient.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btn_Spin_Click(object sender, EventArgs e)
@@ -75,6 +85,18 @@ namespace RussianRouletteClient
         private void btn_SendMessage_Click(object sender, EventArgs e)
         {
             _gameClient.SendMessage(this.clientUser,new UMessage() { MessageContent = tb_GameChat.Text, TimeSent = DateTime.Now, SenderId = clientUser.Id});
+        }
+
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                _gameClient.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
 

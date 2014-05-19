@@ -29,7 +29,7 @@ namespace RussianRouletteServiceLibrary.Interfaces
         }
     }
 
-    [ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(IGameCallback))]
+    [ServiceContract(SessionMode = SessionMode.Allowed, CallbackContract = typeof(IGameCallback))]
     public interface IGame
     {
         [OperationContract]

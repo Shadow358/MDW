@@ -17,7 +17,7 @@ namespace RussianRouletteServiceLibrary.Interfaces
     }
 
     [ServiceContract(
-    SessionMode = SessionMode.Required,
+    SessionMode = SessionMode.Allowed,
     CallbackContract = typeof(IPortalCallback))]
     public interface IPortal
     {
