@@ -22,11 +22,11 @@
     <MetadataSource Address="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="67453ff3-b15a-4db4-9996-8c06b17a917c" SourceId="1" SourceUrl="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd2" />
-    <MetadataFile FileName="WCFRouletteServer1.wsdl" MetadataType="Wsdl" ID="9e6161cb-08a2-4871-9234-9549add8cb59" SourceId="1" SourceUrl="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?wsdl" />
-    <MetadataFile FileName="item31.xsd" MetadataType="Schema" ID="6824754b-9bd0-4b46-a847-8e07cbd0f025" SourceId="1" SourceUrl="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd1" />
-    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="b8075eca-9a87-4d1a-be16-ab958ae3e2c9" SourceId="1" SourceUrl="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?disco" />
-    <MetadataFile FileName="item32.xsd" MetadataType="Schema" ID="28d7821b-a6dc-4341-81d8-203c227c8cd1" SourceId="1" SourceUrl="http://mdwapp.com:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd0" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="083ae49c-f0dd-4d47-98d3-97ca37c3e4e8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd2" />
+    <MetadataFile FileName="WCFRouletteServer.wsdl" MetadataType="Wsdl" ID="a1e6bfcb-8f0f-41dc-a578-3fe1baab4432" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?wsdl" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="25a8a50c-9887-4250-8a89-b2d8368768ed" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd1" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="14f8ab6b-579c-4d99-8ce1-ddf5c4c9efe1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?xsd=xsd0" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="fa2aafc2-0b8a-49af-88e6-a244ebbdf107" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RussianRouletteServiceLibrary/RussianRoulette/?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -101,13 +101,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\RussianRouletteService\item31.xsd">
+    <None Include="Service References\RussianRouletteService\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\RussianRouletteService\item32.xsd">
+    <None Include="Service References\RussianRouletteService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\RussianRouletteService\WCFRouletteServer1.wsdl" />
+    <None Include="Service References\RussianRouletteService\WCFRouletteServer.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -122,7 +122,7 @@
     <None Include="Service References\RussianRouletteService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\RussianRouletteService\item3.xsd">
+    <None Include="Service References\RussianRouletteService\item.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\RussianRouletteService\Reference.svcmap">
@@ -131,7 +131,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\RussianRouletteService\item1.disco" />
+    <None Include="Service References\RussianRouletteService\item.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

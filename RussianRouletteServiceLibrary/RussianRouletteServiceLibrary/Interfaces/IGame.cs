@@ -8,50 +8,89 @@ using System.Web;
 
 namespace RussianRouletteServiceLibrary.Interfaces
 {
-    [DataContract]
-    public class Game
-    {
-        [DataMember]
-        public int _id { get; set; }
+    //[DataContract]
+    //public class Game
+    //{
+    //    [DataMember]
+    //    public int _id { get; set; }
 
-        public User _player1 { get; set; }
-        public User _player2 { get; set; }
+    //    public User _player1 { get; set; }
+    //    public User _player2 { get; set; }
 
-        public List<UMessage> _gameChat;
-        private bool[] _cylinder;
-        public User _winner;
+    //    public List<UMessage> _gameChat;
+    //    public bool[] _cylinder;
+    //    public User _winner;
 
-        public Game(User player1, User player2)
-        {
-            _cylinder = new bool[6];
-            _gameChat = new List<UMessage>();
+    //    public Dictionary<User, IGameCallback> clients = null;
 
-        }
-    }
+    //    public List<User> playerList = null;
+
+    //    public Game(User player1, User player2)
+    //    {
+
+    //        clients = new Dictionary<User, IGameCallback>();
+    //        playerList = new List<User>();
+
+    //        _cylinder = new bool[6];
+    //        _gameChat = new List<UMessage>();
+
+    //    }
+
+    //    public Game()
+    //    {
+    //        clients = new Dictionary<User, IGameCallback>();
+    //        playerList = new List<User>();
+
+    //        _cylinder = new bool[6];
+    //        _gameChat = new List<UMessage>();
+
+    //    }
+
+        
+
+    //    public IGameCallback CurrentCallback
+    //    {
+    //        get
+    //        {
+    //            return OperationContext.Current.
+    //                   GetCallbackChannel<IGameCallback>();
+    //        }
+    //    }
+
+    //    public bool SearchUsersByNickname(string nickname)
+    //    {
+    //        return clients.Keys.Any(c => c.NickName == nickname);
+    //    }
+    //}
 
     [ServiceContract(SessionMode = SessionMode.Allowed, CallbackContract = typeof(IGameCallback))]
     public interface IGame
     {
         [OperationContract]
-        void Play();
+        void Play(User user);
 
         [OperationContract]
-        string PlaceBullet(int cylinderHole);
+        void PlaceBullet(int cylinderHole, User user);
 
         [OperationContract]
-        string SpingCylinder();
+        void SpinCylinder();
 
         [OperationContract]
-        bool Shoot(User player);
+        bool Shoot(User player, int chosenHole);
 
         [OperationContract(IsOneWay = true)]
         void SendMessage(User user,UMessage message);
 
         [OperationContract]
-        string DetermineWinner();
+        void DetermineWinner();
 
         [OperationContract]
-        string Rematch();
+        void Rematch();
+
+        [OperationContract]
+        void Disconnect(User user);
+
+
     }
 
     public interface IGameCallback
@@ -60,13 +99,27 @@ namespace RussianRouletteServiceLibrary.Interfaces
         void PlayerSentMessage(User user, UMessage message);
 
         [OperationContract(IsOneWay = true)]
-        void PlayerDisconnected();
+        void PlayerDisconnected(User user, UMessage message);
 
         [OperationContract(IsOneWay = true)]
-        void PlayerReady();
+        void PlayerReady(User user);
 
         [OperationContract(IsOneWay = true)]
-        void PlayerLost();
+        void PlayerLost(User user, UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void BulletPlaced(User user, UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void CylinderSpun(UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void RematchRequested(User user, UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void YourTurn(User user, int nextHole);
+
+
     }
 
 }

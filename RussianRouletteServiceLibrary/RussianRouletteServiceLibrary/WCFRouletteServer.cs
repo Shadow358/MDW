@@ -1,4 +1,5 @@
 ﻿
+using System.Security.Cryptography;
 using RussianRouletteServiceLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,70 +13,224 @@ using RussianRouletteServiceLibrary.Data;
 namespace RussianRouletteServiceLibrary
 {
     //[CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Single, UseSynchronizationContext=false)]
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession,
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
                      ConcurrencyMode = ConcurrencyMode.Multiple,
                      UseSynchronizationContext = false)]
     public class WCFRouletteServer : IGame, IPortal, IDisposable
     {
         //Database object
         ServiceContext db = new ServiceContext();
-
+        public bool[] _cylinder = new bool[6];
 
         //Event actions
         //static Action<User, UMessage> m_PortalEvents = delegate {};
         //static Action<int> m_PortalTest = delegate { };
         //static Action<User, UMessage> m_Portal = delegate { };
 
-        private Action<User, UMessage> gameChat = delegate { };
+        private Action<User, UMessage> gameCallbacks = delegate { };
+        //private Game _gameObj = new Game();
+
+        //private Game newGame = null;
+
+        public IGameCallback CurrentCallback
+        {
+            get
+            {
+                return OperationContext.Current.
+                       GetCallbackChannel<IGameCallback>();
+            }
+        }
+
+        public bool SearchUsersByNickname(string nickname)
+        {
+            return clients.Keys.Any(c => c.NickName == nickname);
+        }
+
+        Dictionary<User, IGameCallback> clients = new Dictionary<User, IGameCallback>();
+        
+        List<User> playerList = new List<User>();
+
+        List<User> portalList = new List<User>();
+
+
+        //NEW STUFF
+        object syncObj = new object();
 
         public WCFRouletteServer()
         {
+           
+        }
+
+        public void Play(User user)
+        {
+            //IGameCallback subscriber =
+            //           OperationContext.Current.GetCallbackChannel<IGameCallback>();
+            //gameCallbacks += subscriber.PlayerSentMessage;
+            //gameCallbacks += subscriber.PlayerDisconnected;
+            //gameCallbacks += subscriber.PlayerLost;
+            //gameCallbacks += subscriber.BulletPlaced;
+            //gameCallbacks += subscriber.CylinderSpun;
+            //gameCallbacks += subscriber.RematchRequested;
+
+            if (!clients.ContainsValue(CurrentCallback) &&
+                !SearchUsersByNickname(user.NickName))
+            {
+                lock (syncObj)
+                {
+                    clients.Add(user, CurrentCallback);
+                    playerList.Add(user);
+
+                    foreach (User userinList in clients.Keys)
+                    {
+                        IGameCallback callback = clients[userinList];
+                        try
+                        {
+                            //callback.RefreshClients(clientList);
+                            callback.PlayerReady(userinList);
+                        }
+                        catch(Exception ex)
+                        {
+                            
+                            //_gameObj.clients.Remove(userinList);
+                            //return false;
+                        }
+
+                    }
+
+                }
+                //return true;
+            }
+            //return false;
+
+
+        }
+
+        public void PlaceBullet(int cylinderHole, User user)
+        {
+            lock (syncObj)
+            {
+                _cylinder[cylinderHole - 1] = true;
+                //gameCallbacks(new User(), new UMessage());
+                foreach (IGameCallback callback in clients.Values)
+                {
+                    callback.BulletPlaced(user, new UMessage(){ MessageContent = "Bullet has been placed by: " + user.NickName});
+                }
+            }
+            
+            
             
         }
 
-        public void Play()
+        public void SpinCylinder()
         {
-            IGameCallback subscriber =
-                       OperationContext.Current.GetCallbackChannel<IGameCallback>();
-            gameChat += subscriber.PlayerSentMessage;
+            lock (syncObj)
+            {
+                var rnum = new Random();
+                for (int i = 0; i < 6; i++)
+                {
+                    _cylinder[i] = false;
+                }
+                _cylinder[rnum.Next(0, 6)] = true;
+
+                foreach (IGameCallback callback in clients.Values)
+                {
+                    callback.CylinderSpun(new UMessage() { MessageContent = "The cylinder has been spun." });
+                }
+            }
         }
 
-        public string PlaceBullet(int cylinderHole)
+        public bool Shoot(User player, int holeChosen)
         {
-            throw new NotImplementedException();
-        }
+            if (_cylinder[holeChosen] == false)
+            {
+                var oponent = playerList.FirstOrDefault(x => x.NickName != player.NickName);
+                if (oponent != null)
+                {
+                    var otherPlayer = oponent.NickName;
+                    clients.FirstOrDefault(x => x.Key.NickName == otherPlayer).Value.YourTurn(player, holeChosen+1);
+                }
+                
+            }
+            else
+            {
+                foreach (User u in clients.Keys)
+                {
+                    IGameCallback callback = clients[u];
+                    callback.PlayerLost(player, new UMessage(){MessageContent = player.NickName + " has lost the game by taking a bullet to his forehead."});
+                }
+            }
 
-        public string SpingCylinder()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Shoot(User player)
-        {
-            throw new NotImplementedException();
+            return false;
         }
 
         //sends message in game.
         public void SendMessage(User user, UMessage message)
         {
+            //try
+            //{
+            //    gameCallbacks(user, message);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
             try
             {
-                gameChat(user, message);
+                foreach (User rec in clients.Keys)
+                {
+                    //if (rec.NickName == user.NickName)
+                    //{
+                        IGameCallback callback = clients[rec];
+                        callback.PlayerSentMessage(user, message);
+
+                        //foreach (User sender in _gameObj.clients.Keys)
+                        //{
+                        //    if (sender.NickName == message.User.NickName)
+                        //    {
+                        //        IGameCallback senderCallback = _gameObj.clients[sender];
+                        //        senderCallback.PlayerSentMessage(user, message);
+                        //        return;
+                        //    }
+                        //}
+                    //}
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                
+                throw;
             }
         }
 
-        public string DetermineWinner()
+        public void DetermineWinner()
         {
             throw new NotImplementedException();
         }
 
-        public string Rematch()
+        public void Rematch()
         {
             throw new NotImplementedException();
+        }
+
+        public void Disconnect(User user)
+        {
+            foreach (User c in clients.Keys)
+            {
+                if (user.NickName == c.NickName)
+                {
+                    lock (syncObj)
+                    {
+                        this.clients.Remove(c);
+                        this.portalList.Remove(c);
+                        foreach (IGameCallback callback in clients.Values)
+                        {
+                            //callback.RefreshClients(this.clientList);
+                            callback.PlayerDisconnected(user, new UMessage(){ MessageContent = "Player " +user.NickName + " disconnected."});
+                        }
+                    }
+                    return;
+                }
+            }
         }
 
 
@@ -147,7 +302,9 @@ namespace RussianRouletteServiceLibrary
 
         public void InviteToPlay(User user)
         {
-
+            var newgameId = db.Games.Last().Id+1;
+            
+            //newGame = new Game(newgameId, user, user);
         }
 
         public void AgreeToPlay()
