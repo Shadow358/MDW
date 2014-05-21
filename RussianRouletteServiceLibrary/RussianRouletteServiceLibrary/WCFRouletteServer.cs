@@ -26,7 +26,7 @@ namespace RussianRouletteServiceLibrary
         //static Action<int> m_PortalTest = delegate { };
         //static Action<User, UMessage> m_Portal = delegate { };
 
-        private static Action<User, UMessage> gameChat = delegate { };
+        private Action<User, UMessage> gameChat = delegate { };
 
         public WCFRouletteServer()
         {
