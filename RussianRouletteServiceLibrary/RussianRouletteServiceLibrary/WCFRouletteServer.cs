@@ -22,6 +22,8 @@ namespace RussianRouletteServiceLibrary
         ServiceContext db = new ServiceContext();
         public bool[] _cylinder = new bool[6];
 
+        
+
         //Event actions
         //static Action<User, UMessage> m_PortalEvents = delegate {};
         //static Action<int> m_PortalTest = delegate { };
@@ -71,6 +73,7 @@ namespace RussianRouletteServiceLibrary
             //gameCallbacks += subscriber.BulletPlaced;
             //gameCallbacks += subscriber.CylinderSpun;
             //gameCallbacks += subscriber.RematchRequested;
+
 
             if (!clients.ContainsValue(CurrentCallback) &&
                 !SearchUsersByNickname(user.NickName))
