@@ -88,7 +88,7 @@ namespace RussianRouletteServiceLibrary.Interfaces
         void Rematch();
 
         [OperationContract]
-        void Disconnect(User user);
+        void Leave(User user);
 
 
     }
@@ -99,7 +99,7 @@ namespace RussianRouletteServiceLibrary.Interfaces
         void PlayerSentMessage(User user, UMessage message);
 
         [OperationContract(IsOneWay = true)]
-        void PlayerDisconnected(User user, UMessage message);
+        void PlayerLeft(User user, UMessage message);
 
         [OperationContract(IsOneWay = true)]
         void PlayerReady(User user);

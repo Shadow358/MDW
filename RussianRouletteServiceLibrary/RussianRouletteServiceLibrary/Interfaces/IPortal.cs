@@ -11,7 +11,7 @@ namespace RussianRouletteServiceLibrary.Interfaces
     [DataContract]
     public class Portal
     {
-        [DataMember]
+        //[DataMember]
         public String PortalName { get; set; }
 
     }
@@ -25,10 +25,10 @@ namespace RussianRouletteServiceLibrary.Interfaces
         string SignUp(User user);
 
         [OperationContract]
-        bool SignIn(User user);
+        void SignIn(User user);
 
         [OperationContract]
-        void SendPublicMessage(UMessage message);
+        void SendPublicMessage(User user, UMessage message);
 
         [OperationContract]
         void SendPrivateMessage(User user, UMessage message);
@@ -38,12 +38,25 @@ namespace RussianRouletteServiceLibrary.Interfaces
 
         [OperationContract]
         void AgreeToPlay();
+
+        [OperationContract]
+        void Disconnect(User user);
+
+        [OperationContract]
+        bool checkSignIn(User user);
+
+        [OperationContract]
+        List<string> GetUsersList();
+
     }
 
     public interface IPortalCallback
     {
         [OperationContract(IsOneWay = true)]
-        void OnUserSignIn(User user, UMessage message);
+        void OnUserSignIn(List<string> userList , UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void SignInSuccess(User user);
 
         [OperationContract(IsOneWay = true)]
         void OnUserSignOut(User user, UMessage message);
@@ -54,7 +67,13 @@ namespace RussianRouletteServiceLibrary.Interfaces
         [OperationContract(IsOneWay = true)]
         void OnPrivateMessageSent(User user, UMessage message);
 
-        [OperationContract(IsOneWay=true)]
+        [OperationContract(IsOneWay = true)]
         void OnInvitedToPlay(User user);
+
+        [OperationContract(IsOneWay = true)]
+        void UserDisconnected(List<string> userList, UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void GetUserList(List<User> users);
     }
 }

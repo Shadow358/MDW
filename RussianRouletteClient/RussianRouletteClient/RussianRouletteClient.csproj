@@ -107,6 +107,9 @@
     <None Include="Service References\RussianRouletteService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\RussianRouletteService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\RussianRouletteService\WCFRouletteServer.wsdl" />
   </ItemGroup>
   <ItemGroup>

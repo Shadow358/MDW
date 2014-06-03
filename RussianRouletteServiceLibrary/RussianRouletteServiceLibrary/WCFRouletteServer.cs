@@ -12,7 +12,7 @@ using RussianRouletteServiceLibrary.Data;
 
 namespace RussianRouletteServiceLibrary
 {
-    //[CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Single, UseSynchronizationContext=false)]
+  
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single,
                      ConcurrencyMode = ConcurrencyMode.Multiple,
                      UseSynchronizationContext = false)]
@@ -20,21 +20,12 @@ namespace RussianRouletteServiceLibrary
     {
         //Database object
         ServiceContext db = new ServiceContext();
+      
         public bool[] _cylinder = new bool[6];
 
-        
-
-        //Event actions
-        //static Action<User, UMessage> m_PortalEvents = delegate {};
-        //static Action<int> m_PortalTest = delegate { };
-        //static Action<User, UMessage> m_Portal = delegate { };
-
-        private Action<User, UMessage> gameCallbacks = delegate { };
-        //private Game _gameObj = new Game();
-
-        //private Game newGame = null;
-
-        public IGameCallback CurrentCallback
+      private Action<User, UMessage> gameCallbacks = delegate { };
+      
+        public IGameCallback CurrentGameCallback
         {
             get
             {
@@ -43,13 +34,25 @@ namespace RussianRouletteServiceLibrary
             }
         }
 
+        public IPortalCallback CurrentPortalCallback
+        {
+            get
+            {
+                return OperationContext.Current.
+                       GetCallbackChannel<IPortalCallback>();
+            }
+        }
+
         public bool SearchUsersByNickname(string nickname)
         {
-            return clients.Keys.Any(c => c.NickName == nickname);
+            return portalClientsDictionary.Keys.Any(c => c.NickName == nickname);
         }
 
         Dictionary<User, IGameCallback> clients = new Dictionary<User, IGameCallback>();
+
+        Dictionary<User, IPortalCallback> portalClientsDictionary = new Dictionary<User, IPortalCallback>();
         
+
         List<User> playerList = new List<User>();
 
         List<User> portalList = new List<User>();
@@ -65,22 +68,12 @@ namespace RussianRouletteServiceLibrary
 
         public void Play(User user)
         {
-            //IGameCallback subscriber =
-            //           OperationContext.Current.GetCallbackChannel<IGameCallback>();
-            //gameCallbacks += subscriber.PlayerSentMessage;
-            //gameCallbacks += subscriber.PlayerDisconnected;
-            //gameCallbacks += subscriber.PlayerLost;
-            //gameCallbacks += subscriber.BulletPlaced;
-            //gameCallbacks += subscriber.CylinderSpun;
-            //gameCallbacks += subscriber.RematchRequested;
-
-
-            if (!clients.ContainsValue(CurrentCallback) &&
+            if (!clients.ContainsValue(CurrentGameCallback) &&
                 !SearchUsersByNickname(user.NickName))
             {
                 lock (syncObj)
                 {
-                    clients.Add(user, CurrentCallback);
+                    clients.Add(user, CurrentGameCallback);
                     playerList.Add(user);
 
                     foreach (User userinList in clients.Keys)
@@ -88,22 +81,17 @@ namespace RussianRouletteServiceLibrary
                         IGameCallback callback = clients[userinList];
                         try
                         {
-                            //callback.RefreshClients(clientList);
                             callback.PlayerReady(userinList);
                         }
                         catch(Exception ex)
                         {
                             
-                            //_gameObj.clients.Remove(userinList);
-                            //return false;
                         }
 
                     }
 
                 }
-                //return true;
-            }
-            //return false;
+             }
 
 
         }
@@ -113,7 +101,7 @@ namespace RussianRouletteServiceLibrary
             lock (syncObj)
             {
                 _cylinder[cylinderHole - 1] = true;
-                //gameCallbacks(new User(), new UMessage());
+
                 foreach (IGameCallback callback in clients.Values)
                 {
                     callback.BulletPlaced(user, new UMessage(){ MessageContent = "Bullet has been placed by: " + user.NickName});
@@ -169,39 +157,19 @@ namespace RussianRouletteServiceLibrary
         //sends message in game.
         public void SendMessage(User user, UMessage message)
         {
-            //try
-            //{
-            //    gameCallbacks(user, message);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
             try
             {
                 foreach (User rec in clients.Keys)
                 {
-                    //if (rec.NickName == user.NickName)
-                    //{
                         IGameCallback callback = clients[rec];
                         callback.PlayerSentMessage(user, message);
 
-                        //foreach (User sender in _gameObj.clients.Keys)
-                        //{
-                        //    if (sender.NickName == message.User.NickName)
-                        //    {
-                        //        IGameCallback senderCallback = _gameObj.clients[sender];
-                        //        senderCallback.PlayerSentMessage(user, message);
-                        //        return;
-                        //    }
-                        //}
-                    //}
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 
-                throw;
+                
             }
         }
 
@@ -215,7 +183,7 @@ namespace RussianRouletteServiceLibrary
             throw new NotImplementedException();
         }
 
-        public void Disconnect(User user)
+        public void Leave(User user)
         {
             foreach (User c in clients.Keys)
             {
@@ -228,7 +196,7 @@ namespace RussianRouletteServiceLibrary
                         foreach (IGameCallback callback in clients.Values)
                         {
                             //callback.RefreshClients(this.clientList);
-                            callback.PlayerDisconnected(user, new UMessage(){ MessageContent = "Player " +user.NickName + " disconnected."});
+                            callback.PlayerLeft(user, new UMessage(){ MessageContent = "Player " +user.NickName + " disconnected."});
                         }
                     }
                     return;
@@ -261,41 +229,102 @@ namespace RussianRouletteServiceLibrary
             //}
         }
 
-        public bool SignIn(User user)
+        public bool checkSignIn(User user)
         {
-            var userDb = db.Users.FirstOrDefault(x => x.Email == user.Email);
+            User userDb = db.Users.FirstOrDefault(x => x.Email == user.Email);
+
+            if (userDb != null && userDb.Password == user.Password)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public List<string> GetUsersList()
+        {
+            List<string> tempList = new List<string>();
+            foreach (User item in portalList)
+            {
+                tempList.Add(item.NickName);
+            }
+            return tempList;
+        }
+
+        public void SignIn(User user)
+        {
+            User userDb = db.Users.FirstOrDefault(x => x.Email == user.Email);
+            
             if (userDb != null)
             {
-                if (db.Users.FirstOrDefault(x => x.Email == user.Email).Password == user.Password)
+                User currentUser = new User()
                 {
-                    IPortalCallback subscriber =
-                        OperationContext.Current.GetCallbackChannel<IPortalCallback>();
-                    //m_PortalEvents += subscriber.OnUserSignIn;
-                    //m_PortalEvents += subscriber.OnPublicMessageSent;
+                    Email = userDb.Email,
+                    FirstName = userDb.FirstName,
+                    LastName = userDb.LastName,
+                    NickName = userDb.NickName,
+                    Id = userDb.Id,
+                    UMessages = userDb.UMessages
+                };
+               
+                                
+                if (userDb.Password == user.Password)
+                {
+                    if (!portalClientsDictionary.ContainsValue(CurrentPortalCallback) &&
+                        !SearchUsersByNickname(userDb.NickName))
+                    {
+                        lock (syncObj)
+                        {
 
-                    //m_Portal += subscriber.OnUserSignIn;
-                    //m_Portal += subscriber.OnUserSignOut;
-                    //m_Portal += subscriber.OnPublicMessageSent;
+                            portalClientsDictionary.Add(userDb, CurrentPortalCallback);
+                            portalList.Add(userDb);
+                            try
+                            {
+                                portalClientsDictionary[
+                                    portalClientsDictionary.Keys.First(x => x.Email == userDb.Email)].SignInSuccess(currentUser);//new User(){ Email = userDb.Email, FirstName = userDb.FirstName, LastName = userDb.LastName, NickName = userDb.NickName, Id = userDb.Id, UMessages = userDb.UMessages});
 
-                    //m_PortalEvents(user, new UMessage() { MessageContent = "User :: "+user.NickName+" has signed in", TimeSent = DateTime.Now});
-                    return true;
+                             
+                                    foreach (User rec in portalClientsDictionary.Keys)//.Where(x=>x.Email != userDb.Email))
+                                    {
+                                        IPortalCallback callback = portalClientsDictionary[rec];
+                                        //callback.OnUserSignIn(portalList, new UMessage(){ MessageContent = "joined"});
+                                        callback.OnUserSignIn(GetUsersList(), new UMessage() { MessageContent = "User : " + currentUser.NickName + " : has joined the portal!", User = user });
+                                        
+                                    }
+                                
+                            }
+                            catch (Exception ex)
+                            {
 
+                            }
+                        }
+                    }
                 }
-                else
-                    return false;
             }
-            else return false;
         }
 
-        public void SendPortalMessage(User user, UMessage message)
-        {
-
-        }
 
         //Sends a public message to main portal channel
-        public void SendPublicMessage(UMessage message)
+        public void SendPublicMessage(User user,UMessage message)
         {
-            
+            try
+            {
+                foreach (User rec in portalClientsDictionary.Keys)
+                {
+                    
+                    IPortalCallback callback = portalClientsDictionary[rec];
+                    callback.OnPublicMessageSent(user, message);
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+            }
         }
 
         public void SendPrivateMessage(User user, UMessage message)
@@ -305,7 +334,7 @@ namespace RussianRouletteServiceLibrary
 
         public void InviteToPlay(User user)
         {
-            var newgameId = db.Games.Last().Id+1;
+            //var newgameId = db.Games.Last().Id+1;
             
             //newGame = new Game(newgameId, user, user);
         }
@@ -314,6 +343,28 @@ namespace RussianRouletteServiceLibrary
         {
 
         }
+
+        public void Disconnect(User user)
+        {
+            
+                
+                    lock (syncObj)
+                    {
+                        this.portalClientsDictionary.Remove(
+                            portalClientsDictionary.Keys.First(x => x.Email == user.Email));
+                        this.portalList.Remove(portalList.First(x=>x.Email ==user.Email));
+                        foreach (IPortalCallback callback in portalClientsDictionary.Values)
+                        {
+                            //callback.RefreshClients(this.clientList);
+                            callback.UserDisconnected(GetUsersList(), new UMessage() { MessageContent = "User : " + user.NickName + " : has left the portal!", User = user});
+                                        
+                        }
+                    }
+                
+            
+        }
+
+        
 
 
         public void Dispose()

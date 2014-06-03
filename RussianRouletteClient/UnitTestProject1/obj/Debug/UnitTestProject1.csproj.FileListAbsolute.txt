@@ -1,0 +1,6 @@
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\UnitTestProject1\bin\Debug\RRClientTestUnit.dll.config
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\UnitTestProject1\bin\Debug\RRClientTestUnit.dll
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\UnitTestProject1\bin\Debug\RRClientTestUnit.pdb
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\UnitTestProject1\obj\Debug\RRClientTestUnit.dll
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\UnitTestProject1\obj\Debug\RRClientTestUnit.pdb

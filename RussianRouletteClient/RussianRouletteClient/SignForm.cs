@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RussianRouletteClient.RussianRouletteService;
@@ -15,46 +17,72 @@ namespace RussianRouletteClient
 
 
      [CallbackBehavior(
-        ConcurrencyMode = ConcurrencyMode.Reentrant,
+        ConcurrencyMode = ConcurrencyMode.Multiple,
         UseSynchronizationContext = false)]
     public partial class StartForm : Form, IPortalCallback
     {
         #region IPortal callbacks
-        public void OnUserSignIn(User user, UMessage message)
+        
+
+        public void OnUserSignIn(string[] userList, UMessage message)
         {
-            MessageBox.Show("User " + user.NickName + " has signed in.");
+            throw new NotImplementedException();
         }
+
+        public void SignInSuccess(User user)
+        {
+            
+            currentUser = user;
+        }
+
         public void OnUserSignOut(User user, UMessage message)
         {
-
-        }
-
-        public void OnInvitedToPlay(User user)
-        {
-
+            throw new NotImplementedException();
         }
 
         public void OnPublicMessageSent(User user, UMessage message)
         {
-
+            throw new NotImplementedException();
         }
 
         public void OnPrivateMessageSent(User user, UMessage message)
         {
-
+            throw new NotImplementedException();
         }
-        #endregion
-        
 
-       private GameClient _gameClient = null;
-       private PortalClient _portalClient = null;
-       private InstanceContext _instance = null;
-       public string message = null;
+        public void OnInvitedToPlay(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+         public void UserDisconnected(string[] userList, UMessage message)
+         {
+             throw new NotImplementedException();
+         }
+
+         public void UserDisconnected(User user)
+         {
+             throw new NotImplementedException();
+         }
+
+         public void GetUserList(User[] users)
+         {
+             throw new NotImplementedException();
+         }
+
+         #endregion
+
+
+
+        public PortalClient _portalClient = null;
+        private InstanceContext _instance = null;
+        public User currentUser;// = new User() { Email = "zigm4s@gmail.com", Id = 0, FirstName = "Zigmas", LastName = "Slusnys", NickName = "Ziggy", Password = "asdfasd" };
+
          
         public StartForm()
        {
-               _instance = new InstanceContext(this);
-               _portalClient = new PortalClient(_instance);
+
+               _portalClient = new PortalClient(new InstanceContext(this));
                
 
            
@@ -67,12 +95,21 @@ namespace RussianRouletteClient
 
         //319, 173 closed registration
 
-        private void btn_SignIn_Click(object sender, EventArgs e)
-        {
-            bool login = _portalClient.SignIn(new User() { Email = tb_Email.Text, Password = tb_Password.Text });
-            MessageBox.Show(login.ToString());
-            
-        }
+         private void btn_SignIn_Click(object sender, EventArgs e)
+         {
+             currentUser = new User() {Email = tb_Email.Text, Password = tb_Password.Text};
+             bool checkSignIn = _portalClient.checkSignIn(currentUser);
+             if (checkSignIn)
+             {
+                 this.DialogResult = DialogResult.OK;
+                 //PortalForm portalas = new PortalForm(currentUser);
+                 //portalas.Show();
+             }
+             else
+             {
+                 MessageBox.Show("failed to login");
+             }
+         }
 
         private void btn_SignUp_Click(object sender, EventArgs e)
         {
@@ -107,17 +144,26 @@ namespace RussianRouletteClient
         {
             try
             {
-                _portalClient.Close();
+                if (_portalClient.State != CommunicationState.Faulted)
+                {
+                    //MessageBox.Show("Closing client");
+                    //_gameClient.Disconnect(clientUser);
+                   // _portalClient.ChannelFactory.Close();
+                    _portalClient.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Aborting client");
+                    //_portalClient.Disconnect(clientUser);
+                    _portalClient.Abort();
+                }
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.ToString()); }
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
-           
         }
     }
 }

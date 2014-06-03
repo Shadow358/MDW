@@ -34,7 +34,7 @@ namespace RussianRouletteClient
             //lb_ChatBox.Items.Add("[" + message.TimeSent + "] " + user.NickName + " : " + message.MessageContent);
         }
 
-        public void PlayerDisconnected(User user, UMessage message)
+        public void PlayerLeft(User user, UMessage message)
         {
             MessageBox.Show(message.MessageContent);
         }
@@ -73,9 +73,13 @@ namespace RussianRouletteClient
 
         #endregion
 
+        public bool loggedIn = false;
+
         private GameClient _gameClient = null;
         private InstanceContext _instance = null;
         private User clientUser = new User(){ Email = "zigm4s@gmail.com", Id = 0, FirstName = "Zigmas", LastName = "Slusnys", NickName = "Ziggy", Password = "test123"};
+
+
 
         private int cylinderCounter = 0; 
 
@@ -158,14 +162,14 @@ namespace RussianRouletteClient
                 if (_gameClient.State != System.ServiceModel.CommunicationState.Faulted)
                 {
                     MessageBox.Show("Closing client");
-                    _gameClient.Disconnect(clientUser);
+                    _gameClient.Leave(clientUser);
                     _gameClient.ChannelFactory.Close();
                     _gameClient.Close();
                 }
                 else
                 {
                     MessageBox.Show("Aborting client");
-                    _gameClient.Disconnect(clientUser);
+                    _gameClient.Leave(clientUser);
                     _gameClient.Abort();
                 }
                 }

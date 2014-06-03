@@ -4,9 +4,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Games" nillable="true" type="tns:ArrayOfGame" />
-      <xs:element minOccurs="0" name="Games1" nillable="true" type="tns:ArrayOfGame" />
-      <xs:element minOccurs="0" name="Games2" nillable="true" type="tns:ArrayOfGame" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NickName" nillable="true" type="xs:string" />
@@ -15,16 +12,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="User" nillable="true" type="tns:User" />
-  <xs:complexType name="ArrayOfGame">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Game" nillable="true" type="tns:Game" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfGame" nillable="true" type="tns:ArrayOfGame" />
-  <xs:complexType name="Game">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:element name="Game" nillable="true" type="tns:Game" />
   <xs:complexType name="ArrayOfUMessage">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="UMessage" nillable="true" type="tns:UMessage" />
@@ -41,4 +28,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UMessage" nillable="true" type="tns:UMessage" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
 </xs:schema>

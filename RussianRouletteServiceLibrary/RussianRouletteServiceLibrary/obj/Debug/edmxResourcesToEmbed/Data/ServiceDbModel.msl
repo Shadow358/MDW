@@ -23,15 +23,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Games">
-      <EntityTypeMapping TypeName="ServiceDBModel.Game">
-        <MappingFragment StoreEntitySet="Games">
-          <ScalarProperty Name="Winner" ColumnName="Winner" />
-          <ScalarProperty Name="SecondPlayer" ColumnName="SecondPlayer" />
-          <ScalarProperty Name="FirstPlayer" ColumnName="FirstPlayer" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

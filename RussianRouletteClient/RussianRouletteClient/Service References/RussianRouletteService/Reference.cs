@@ -29,15 +29,6 @@ namespace RussianRouletteClient.RussianRouletteService {
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private RussianRouletteClient.RussianRouletteService.Game[] GamesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private RussianRouletteClient.RussianRouletteService.Game[] Games1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private RussianRouletteClient.RussianRouletteService.Game[] Games2Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -84,45 +75,6 @@ namespace RussianRouletteClient.RussianRouletteService {
                 if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
                     this.FirstNameField = value;
                     this.RaisePropertyChanged("FirstName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public RussianRouletteClient.RussianRouletteService.Game[] Games {
-            get {
-                return this.GamesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GamesField, value) != true)) {
-                    this.GamesField = value;
-                    this.RaisePropertyChanged("Games");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public RussianRouletteClient.RussianRouletteService.Game[] Games1 {
-            get {
-                return this.Games1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Games1Field, value) != true)) {
-                    this.Games1Field = value;
-                    this.RaisePropertyChanged("Games1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public RussianRouletteClient.RussianRouletteService.Game[] Games2 {
-            get {
-                return this.Games2Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Games2Field, value) != true)) {
-                    this.Games2Field = value;
-                    this.RaisePropertyChanged("Games2");
                 }
             }
         }
@@ -189,35 +141,6 @@ namespace RussianRouletteClient.RussianRouletteService {
                     this.UMessagesField = value;
                     this.RaisePropertyChanged("UMessages");
                 }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Game", Namespace="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data")]
-    [System.SerializableAttribute()]
-    public partial class Game : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
             }
         }
         
@@ -386,11 +309,11 @@ namespace RussianRouletteClient.RussianRouletteService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Rematch", ReplyAction="http://tempuri.org/IGame/RematchResponse")]
         System.Threading.Tasks.Task RematchAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Disconnect", ReplyAction="http://tempuri.org/IGame/DisconnectResponse")]
-        void Disconnect(RussianRouletteClient.RussianRouletteService.User user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Leave", ReplyAction="http://tempuri.org/IGame/LeaveResponse")]
+        void Leave(RussianRouletteClient.RussianRouletteService.User user);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Disconnect", ReplyAction="http://tempuri.org/IGame/DisconnectResponse")]
-        System.Threading.Tasks.Task DisconnectAsync(RussianRouletteClient.RussianRouletteService.User user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Leave", ReplyAction="http://tempuri.org/IGame/LeaveResponse")]
+        System.Threading.Tasks.Task LeaveAsync(RussianRouletteClient.RussianRouletteService.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -399,8 +322,8 @@ namespace RussianRouletteClient.RussianRouletteService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayerSentMessage")]
         void PlayerSentMessage(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayerDisconnected")]
-        void PlayerDisconnected(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayerLeft")]
+        void PlayerLeft(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/PlayerReady")]
         void PlayerReady(RussianRouletteClient.RussianRouletteService.User user);
@@ -505,12 +428,12 @@ namespace RussianRouletteClient.RussianRouletteService {
             return base.Channel.RematchAsync();
         }
         
-        public void Disconnect(RussianRouletteClient.RussianRouletteService.User user) {
-            base.Channel.Disconnect(user);
+        public void Leave(RussianRouletteClient.RussianRouletteService.User user) {
+            base.Channel.Leave(user);
         }
         
-        public System.Threading.Tasks.Task DisconnectAsync(RussianRouletteClient.RussianRouletteService.User user) {
-            return base.Channel.DisconnectAsync(user);
+        public System.Threading.Tasks.Task LeaveAsync(RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.LeaveAsync(user);
         }
     }
     
@@ -525,16 +448,16 @@ namespace RussianRouletteClient.RussianRouletteService {
         System.Threading.Tasks.Task<string> SignUpAsync(RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/SignIn", ReplyAction="http://tempuri.org/IPortal/SignInResponse")]
-        bool SignIn(RussianRouletteClient.RussianRouletteService.User user);
+        void SignIn(RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/SignIn", ReplyAction="http://tempuri.org/IPortal/SignInResponse")]
-        System.Threading.Tasks.Task<bool> SignInAsync(RussianRouletteClient.RussianRouletteService.User user);
+        System.Threading.Tasks.Task SignInAsync(RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/SendPublicMessage", ReplyAction="http://tempuri.org/IPortal/SendPublicMessageResponse")]
-        void SendPublicMessage(RussianRouletteClient.RussianRouletteService.UMessage message);
+        void SendPublicMessage(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/SendPublicMessage", ReplyAction="http://tempuri.org/IPortal/SendPublicMessageResponse")]
-        System.Threading.Tasks.Task SendPublicMessageAsync(RussianRouletteClient.RussianRouletteService.UMessage message);
+        System.Threading.Tasks.Task SendPublicMessageAsync(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/SendPrivateMessage", ReplyAction="http://tempuri.org/IPortal/SendPrivateMessageResponse")]
         void SendPrivateMessage(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
@@ -553,13 +476,34 @@ namespace RussianRouletteClient.RussianRouletteService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/AgreeToPlay", ReplyAction="http://tempuri.org/IPortal/AgreeToPlayResponse")]
         System.Threading.Tasks.Task AgreeToPlayAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/Disconnect", ReplyAction="http://tempuri.org/IPortal/DisconnectResponse")]
+        void Disconnect(RussianRouletteClient.RussianRouletteService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/Disconnect", ReplyAction="http://tempuri.org/IPortal/DisconnectResponse")]
+        System.Threading.Tasks.Task DisconnectAsync(RussianRouletteClient.RussianRouletteService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/checkSignIn", ReplyAction="http://tempuri.org/IPortal/checkSignInResponse")]
+        bool checkSignIn(RussianRouletteClient.RussianRouletteService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/checkSignIn", ReplyAction="http://tempuri.org/IPortal/checkSignInResponse")]
+        System.Threading.Tasks.Task<bool> checkSignInAsync(RussianRouletteClient.RussianRouletteService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/GetUsersList", ReplyAction="http://tempuri.org/IPortal/GetUsersListResponse")]
+        string[] GetUsersList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/GetUsersList", ReplyAction="http://tempuri.org/IPortal/GetUsersListResponse")]
+        System.Threading.Tasks.Task<string[]> GetUsersListAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IPortalCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnUserSignIn")]
-        void OnUserSignIn(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
+        void OnUserSignIn(string[] userList, RussianRouletteClient.RussianRouletteService.UMessage message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/SignInSuccess")]
+        void SignInSuccess(RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnUserSignOut")]
         void OnUserSignOut(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
@@ -572,6 +516,12 @@ namespace RussianRouletteClient.RussianRouletteService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnInvitedToPlay")]
         void OnInvitedToPlay(RussianRouletteClient.RussianRouletteService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/UserDisconnected")]
+        void UserDisconnected(string[] userList, RussianRouletteClient.RussianRouletteService.UMessage message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/GetUserList")]
+        void GetUserList(RussianRouletteClient.RussianRouletteService.User[] users);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -610,20 +560,20 @@ namespace RussianRouletteClient.RussianRouletteService {
             return base.Channel.SignUpAsync(user);
         }
         
-        public bool SignIn(RussianRouletteClient.RussianRouletteService.User user) {
-            return base.Channel.SignIn(user);
+        public void SignIn(RussianRouletteClient.RussianRouletteService.User user) {
+            base.Channel.SignIn(user);
         }
         
-        public System.Threading.Tasks.Task<bool> SignInAsync(RussianRouletteClient.RussianRouletteService.User user) {
+        public System.Threading.Tasks.Task SignInAsync(RussianRouletteClient.RussianRouletteService.User user) {
             return base.Channel.SignInAsync(user);
         }
         
-        public void SendPublicMessage(RussianRouletteClient.RussianRouletteService.UMessage message) {
-            base.Channel.SendPublicMessage(message);
+        public void SendPublicMessage(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message) {
+            base.Channel.SendPublicMessage(user, message);
         }
         
-        public System.Threading.Tasks.Task SendPublicMessageAsync(RussianRouletteClient.RussianRouletteService.UMessage message) {
-            return base.Channel.SendPublicMessageAsync(message);
+        public System.Threading.Tasks.Task SendPublicMessageAsync(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message) {
+            return base.Channel.SendPublicMessageAsync(user, message);
         }
         
         public void SendPrivateMessage(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message) {
@@ -648,6 +598,30 @@ namespace RussianRouletteClient.RussianRouletteService {
         
         public System.Threading.Tasks.Task AgreeToPlayAsync() {
             return base.Channel.AgreeToPlayAsync();
+        }
+        
+        public void Disconnect(RussianRouletteClient.RussianRouletteService.User user) {
+            base.Channel.Disconnect(user);
+        }
+        
+        public System.Threading.Tasks.Task DisconnectAsync(RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.DisconnectAsync(user);
+        }
+        
+        public bool checkSignIn(RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.checkSignIn(user);
+        }
+        
+        public System.Threading.Tasks.Task<bool> checkSignInAsync(RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.checkSignInAsync(user);
+        }
+        
+        public string[] GetUsersList() {
+            return base.Channel.GetUsersList();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetUsersListAsync() {
+            return base.Channel.GetUsersListAsync();
         }
     }
 }
