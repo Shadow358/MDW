@@ -9,14 +9,14 @@
 
 namespace RussianRouletteServiceLibrary.Data
 {
-    using System;
     using System.Collections.Generic;
     
     public partial class User
     {
         public User()
         {
-            this.UMessages = new HashSet<UMessage>();
+            this.UMessages = new List<UMessage>();
+            this.Games = new List<Game>();
         }
     
         public int Id { get; set; }
@@ -27,5 +27,6 @@ namespace RussianRouletteServiceLibrary.Data
         public string Password { get; set; }
     
         public virtual ICollection<UMessage> UMessages { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using RussianRouletteServiceLibrary.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Web;
 
 namespace RussianRouletteServiceLibrary.Interfaces
 {
@@ -34,10 +32,10 @@ namespace RussianRouletteServiceLibrary.Interfaces
         void SendPrivateMessage(User user, UMessage message);
 
         [OperationContract]
-        void InviteToPlay(User user);
+        void InviteToPlay(string Nickname, User user);
 
         [OperationContract]
-        void AgreeToPlay();
+        void AgreeToPlay(string Nickname, User user);
 
         [OperationContract]
         void Disconnect(User user);
@@ -68,7 +66,10 @@ namespace RussianRouletteServiceLibrary.Interfaces
         void OnPrivateMessageSent(User user, UMessage message);
 
         [OperationContract(IsOneWay = true)]
-        void OnInvitedToPlay(User user);
+        void InvitedToPlay(User user);
+
+        [OperationContract(IsOneWay = true)]
+        void AgreedToPlay(User user);
 
         [OperationContract(IsOneWay = true)]
         void UserDisconnected(List<string> userList, UMessage message);

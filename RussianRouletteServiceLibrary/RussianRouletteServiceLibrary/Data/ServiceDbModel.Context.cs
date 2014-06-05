@@ -9,7 +9,6 @@
 
 namespace RussianRouletteServiceLibrary.Data
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
@@ -27,5 +26,6 @@ namespace RussianRouletteServiceLibrary.Data
     
         public virtual DbSet<UMessage> UMessages { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Game> Games { get; set; }
     }
 }

@@ -466,16 +466,16 @@ namespace RussianRouletteClient.RussianRouletteService {
         System.Threading.Tasks.Task SendPrivateMessageAsync(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/InviteToPlay", ReplyAction="http://tempuri.org/IPortal/InviteToPlayResponse")]
-        void InviteToPlay(RussianRouletteClient.RussianRouletteService.User user);
+        void InviteToPlay(string Nickname, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/InviteToPlay", ReplyAction="http://tempuri.org/IPortal/InviteToPlayResponse")]
-        System.Threading.Tasks.Task InviteToPlayAsync(RussianRouletteClient.RussianRouletteService.User user);
+        System.Threading.Tasks.Task InviteToPlayAsync(string Nickname, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/AgreeToPlay", ReplyAction="http://tempuri.org/IPortal/AgreeToPlayResponse")]
-        void AgreeToPlay();
+        void AgreeToPlay(string Nickname, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/AgreeToPlay", ReplyAction="http://tempuri.org/IPortal/AgreeToPlayResponse")]
-        System.Threading.Tasks.Task AgreeToPlayAsync();
+        System.Threading.Tasks.Task AgreeToPlayAsync(string Nickname, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/Disconnect", ReplyAction="http://tempuri.org/IPortal/DisconnectResponse")]
         void Disconnect(RussianRouletteClient.RussianRouletteService.User user);
@@ -514,8 +514,11 @@ namespace RussianRouletteClient.RussianRouletteService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnPrivateMessageSent")]
         void OnPrivateMessageSent(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/OnInvitedToPlay")]
-        void OnInvitedToPlay(RussianRouletteClient.RussianRouletteService.User user);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/InvitedToPlay")]
+        void InvitedToPlay(RussianRouletteClient.RussianRouletteService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/AgreedToPlay")]
+        void AgreedToPlay(RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/UserDisconnected")]
         void UserDisconnected(string[] userList, RussianRouletteClient.RussianRouletteService.UMessage message);
@@ -584,20 +587,20 @@ namespace RussianRouletteClient.RussianRouletteService {
             return base.Channel.SendPrivateMessageAsync(user, message);
         }
         
-        public void InviteToPlay(RussianRouletteClient.RussianRouletteService.User user) {
-            base.Channel.InviteToPlay(user);
+        public void InviteToPlay(string Nickname, RussianRouletteClient.RussianRouletteService.User user) {
+            base.Channel.InviteToPlay(Nickname, user);
         }
         
-        public System.Threading.Tasks.Task InviteToPlayAsync(RussianRouletteClient.RussianRouletteService.User user) {
-            return base.Channel.InviteToPlayAsync(user);
+        public System.Threading.Tasks.Task InviteToPlayAsync(string Nickname, RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.InviteToPlayAsync(Nickname, user);
         }
         
-        public void AgreeToPlay() {
-            base.Channel.AgreeToPlay();
+        public void AgreeToPlay(string Nickname, RussianRouletteClient.RussianRouletteService.User user) {
+            base.Channel.AgreeToPlay(Nickname, user);
         }
         
-        public System.Threading.Tasks.Task AgreeToPlayAsync() {
-            return base.Channel.AgreeToPlayAsync();
+        public System.Threading.Tasks.Task AgreeToPlayAsync(string Nickname, RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.AgreeToPlayAsync(Nickname, user);
         }
         
         public void Disconnect(RussianRouletteClient.RussianRouletteService.User user) {

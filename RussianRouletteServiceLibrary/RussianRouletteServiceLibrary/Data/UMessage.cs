@@ -10,8 +10,7 @@
 namespace RussianRouletteServiceLibrary.Data
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class UMessage
     {
         public string Id { get; set; }

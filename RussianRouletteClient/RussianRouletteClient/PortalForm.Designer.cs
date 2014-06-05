@@ -135,6 +135,7 @@
             this.lb_usersOnline.Name = "lb_usersOnline";
             this.lb_usersOnline.Size = new System.Drawing.Size(169, 420);
             this.lb_usersOnline.TabIndex = 3;
+            this.lb_usersOnline.Click += new System.EventHandler(this.lb_usersOnline_Click);
             // 
             // tabControl1
             // 

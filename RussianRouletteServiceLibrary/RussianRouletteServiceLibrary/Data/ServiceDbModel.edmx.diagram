@@ -8,6 +8,10 @@
         <EntityTypeShape EntityType="ServiceDBModel.UMessage" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="ServiceDBModel.User" Width="1.5" PointX="0.75" PointY="1" />
         <AssociationConnector Association="ServiceDBModel.FK__UMessages__Sende__36B12243" />
+        <EntityTypeShape EntityType="ServiceDBModel.Game" Width="1.5" PointX="3" PointY="4.25" />
+        <AssociationConnector Association="ServiceDBModel.FK__Games__FirstPlay__5CD6CB2B" />
+        <AssociationConnector Association="ServiceDBModel.FK__Games__SecondPla__5DCAEF64" />
+        <AssociationConnector Association="ServiceDBModel.FK__Games__Winner__5EBF139D" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

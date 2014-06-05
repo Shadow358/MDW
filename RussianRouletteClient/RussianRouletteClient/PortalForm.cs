@@ -54,9 +54,26 @@ namespace RussianRouletteClient
             MessageBox.Show(user.NickName + message.MessageContent);
         }
 
-        public void OnInvitedToPlay(User user)
+        public void InvitedToPlay(User user)
         {
+            DialogResult dialogResult = MessageBox.Show("You have been invited to play by the user " + user.NickName + ". Accept?", "Accept game invitation",
+                MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                _portalProxy.AgreeToPlay(user.NickName, currentUser);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
 
+            //MessageBox.Show("You have been invited to play by the user " + user.NickName);
+        }
+
+        public void AgreedToPlay(User user)
+        {
+            
+            MessageBox.Show("User " + user.NickName + " accepted to play. The game will soon initiate");
         }
 
         public void UserDisconnected(string[] userList, UMessage message)
@@ -149,6 +166,22 @@ namespace RussianRouletteClient
         private void btn_SendMessage_Click(object sender, EventArgs e)
         {
             _portalProxy.SendPublicMessage(currentUser, new UMessage(){ MessageContent = typeBox.Text, TimeSent = DateTime.Now});
+        }
+
+        private void lb_usersOnline_Click(object sender, EventArgs e)
+        {
+            ContextMenu cm = new ContextMenu();
+            cm.MenuItems.Add("Invite to play").Click += delegate
+            {
+               
+                _portalProxy.InviteToPlay(lb_usersOnline.SelectedItem.ToString(), currentUser);
+            };
+
+            cm.MenuItems.Add("Send message");
+
+
+
+            lb_usersOnline.ContextMenu = cm;
         }
     }
 }

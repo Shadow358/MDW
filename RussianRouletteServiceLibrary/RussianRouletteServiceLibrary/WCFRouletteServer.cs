@@ -1,13 +1,8 @@
-﻿
-using System.Security.Cryptography;
-using RussianRouletteServiceLibrary.Interfaces;
+﻿using RussianRouletteServiceLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Data.Entity;
 using System.ServiceModel;
-using System.Data;
 using RussianRouletteServiceLibrary.Data;
 
 namespace RussianRouletteServiceLibrary
@@ -57,6 +52,7 @@ namespace RussianRouletteServiceLibrary
 
         List<User> portalList = new List<User>();
 
+        List<Game> gamesList = new List<Game>();   
 
         //NEW STUFF
         object syncObj = new object();
@@ -114,6 +110,7 @@ namespace RussianRouletteServiceLibrary
 
         public void SpinCylinder()
         {
+            //gamesList.First(x=>x.Id = 55)
             lock (syncObj)
             {
                 var rnum = new Random();
@@ -332,16 +329,18 @@ namespace RussianRouletteServiceLibrary
 
         }
 
-        public void InviteToPlay(User user)
+        public void InviteToPlay(string Nickname, User user)
         {
-            //var newgameId = db.Games.Last().Id+1;
-            
-            //newGame = new Game(newgameId, user, user);
+            if (SearchUsersByNickname(Nickname))
+            {
+                portalClientsDictionary[portalClientsDictionary.Keys.First(x=>x.NickName == Nickname)].InvitedToPlay(user);
+            }
         }
 
-        public void AgreeToPlay()
+        public void AgreeToPlay(string Nickname, User user)
         {
-
+                portalClientsDictionary[portalClientsDictionary.Keys.First(x=>x.NickName == Nickname)].AgreedToPlay(user);  
+            gamesList.Add(new Game(){ Id = db.Games.Last().Id, FirstPlayer = portalList.First(x=>x.NickName == Nickname), SecondPlayer = user });
         }
 
         public void Disconnect(User user)

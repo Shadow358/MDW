@@ -50,10 +50,15 @@ namespace RussianRouletteClient
             throw new NotImplementedException();
         }
 
-        public void OnInvitedToPlay(User user)
+        public void InvitedToPlay(User user)
         {
             throw new NotImplementedException();
         }
+
+         public void AgreedToPlay(User user)
+         {
+             throw new NotImplementedException();
+         }
 
          public void UserDisconnected(string[] userList, UMessage message)
          {
