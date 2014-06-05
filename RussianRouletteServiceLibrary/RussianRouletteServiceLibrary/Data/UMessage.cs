@@ -7,17 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace RussianRouletteServiceLibrary.Data
 {
     using System;
-
+    using System.Collections.Generic;
+    
+    [DataContract]
     public partial class UMessage
     {
+        [DataMember]
         public string Id { get; set; }
+        [DataMember]
         public Nullable<int> SenderId { get; set; }
+        [DataMember]
         public System.DateTime TimeSent { get; set; }
+        [DataMember]
         public string MessageContent { get; set; }
     
+        [DataMember]
         public virtual User User { get; set; }
     }
 }

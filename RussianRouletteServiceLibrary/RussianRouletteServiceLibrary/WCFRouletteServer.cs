@@ -339,8 +339,20 @@ namespace RussianRouletteServiceLibrary
 
         public void AgreeToPlay(string Nickname, User user)
         {
-                portalClientsDictionary[portalClientsDictionary.Keys.First(x=>x.NickName == Nickname)].AgreedToPlay(user);  
-            gamesList.Add(new Game(){ Id = db.Games.Last().Id, FirstPlayer = portalList.First(x=>x.NickName == Nickname), SecondPlayer = user });
+            db.Games.Add(new Game(firstPlayer: portalList.First(x => x.NickName == Nickname).Id, secondPlayer: user.Id));
+            db.SaveChanges();
+            
+            var dbGameList = db.Games.Local.First().Id;
+
+
+            var listas = db.Games.ToList();
+
+                portalClientsDictionary[portalClientsDictionary.Keys.First(x=>x.NickName == Nickname)].AgreedToPlay(user);
+                gamesList.Add(new Game(firstPlayer: portalList.First(x => x.NickName == Nickname).Id, secondPlayer: user.Id) { Id = dbGameList});
+
+               //portalClientsDictionary[portalClientsDictionary.Keys.First(x => x.NickName == Nickname && x.NickName == user.NickName)].AgreedToPlay(user);
+            
+                //new Game(){ Id = db.Games.Last().Id, FirstPlayer = portalList.First(x=>x.NickName == Nickname).Id, SecondPlayer = user.Id });
         }
 
         public void Disconnect(User user)

@@ -7,35 +7,39 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Linq;
-using System.ServiceModel;
-using RussianRouletteServiceLibrary.Interfaces;
+using System.Runtime.Serialization;
 
 namespace RussianRouletteServiceLibrary.Data
 {
+    using System;
     using System.Collections.Generic;
     
+    [DataContract]
     public partial class Game
     {
+        [DataMember]
         public int Id { get; set; }
-        public User FirstPlayer { get; set; }
-        public User SecondPlayer { get; set; }
-        public User Winner { get; set; }
+        [DataMember]
+        public int FirstPlayer { get; set; }
+        [DataMember]
+        public int SecondPlayer { get; set; }
+        [DataMember]
+        public Nullable<int> Winner { get; set; }
+    
+        [DataMember]
+        public virtual User User { get; set; }
 
-        public IGameCallback CurrentGameCallback
+        [Obsolete("Only needed for serialization and materialization", true)]
+        public Game()
         {
-            get
-            {
-                return OperationContext.Current.
-                       GetCallbackChannel<IGameCallback>();
-            }
+            
         }
 
-        public bool SearchUsersByNickname(string nickname)
+        public Game(int firstPlayer, int secondPlayer)
         {
-            return gameClientsDictionary.Keys.Any(c => c.NickName == nickname);
+            //this.Id = id;
+            this.FirstPlayer = firstPlayer;
+            this.SecondPlayer = secondPlayer;
         }
-
-        Dictionary<User, IGameCallback> gameClientsDictionary = new Dictionary<User, IGameCallback>();
     }
 }

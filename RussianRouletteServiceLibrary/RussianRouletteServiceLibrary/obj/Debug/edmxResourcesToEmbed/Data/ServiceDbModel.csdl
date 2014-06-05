@@ -1,26 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ServiceDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="ServiceContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Games" EntityType="ServiceDBModel.Game" />
     <EntitySet Name="UMessages" EntityType="ServiceDBModel.UMessage" />
     <EntitySet Name="Users" EntityType="ServiceDBModel.User" />
-    <AssociationSet Name="FK__UMessages__Sende__36B12243" Association="ServiceDBModel.FK__UMessages__Sende__36B12243">
-      <End Role="User" EntitySet="Users" />
-      <End Role="UMessage" EntitySet="UMessages" />
-    </AssociationSet>
-    <EntitySet Name="Games" EntityType="ServiceDBModel.Game" />
     <AssociationSet Name="FK__Games__FirstPlay__5CD6CB2B" Association="ServiceDBModel.FK__Games__FirstPlay__5CD6CB2B">
       <End Role="User" EntitySet="Users" />
       <End Role="Game" EntitySet="Games" />
     </AssociationSet>
-    <AssociationSet Name="FK__Games__SecondPla__5DCAEF64" Association="ServiceDBModel.FK__Games__SecondPla__5DCAEF64">
+    <AssociationSet Name="FK__UMessages__Sende__36B12243" Association="ServiceDBModel.FK__UMessages__Sende__36B12243">
       <End Role="User" EntitySet="Users" />
-      <End Role="Game" EntitySet="Games" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Games__Winner__5EBF139D" Association="ServiceDBModel.FK__Games__Winner__5EBF139D">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Game" EntitySet="Games" />
+      <End Role="UMessage" EntitySet="UMessages" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstPlayer" Type="Int32" Nullable="false" />
+    <Property Name="SecondPlayer" Type="Int32" Nullable="false" />
+    <Property Name="Winner" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="ServiceDBModel.FK__Games__FirstPlay__5CD6CB2B" FromRole="Game" ToRole="User" />
+  </EntityType>
   <EntityType Name="UMessage">
     <Key>
       <PropertyRef Name="Id" />
@@ -41,34 +43,8 @@
     <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="UMessages" Relationship="ServiceDBModel.FK__UMessages__Sende__36B12243" FromRole="User" ToRole="UMessage" />
     <NavigationProperty Name="Games" Relationship="ServiceDBModel.FK__Games__FirstPlay__5CD6CB2B" FromRole="User" ToRole="Game" />
-    <NavigationProperty Name="Games1" Relationship="ServiceDBModel.FK__Games__SecondPla__5DCAEF64" FromRole="User" ToRole="Game" />
-    <NavigationProperty Name="Games2" Relationship="ServiceDBModel.FK__Games__Winner__5EBF139D" FromRole="User" ToRole="Game" />
-  </EntityType>
-  <Association Name="FK__UMessages__Sende__36B12243">
-    <End Type="ServiceDBModel.User" Role="User" Multiplicity="0..1" />
-    <End Type="ServiceDBModel.UMessage" Role="UMessage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UMessage">
-        <PropertyRef Name="SenderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Game">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FirstPlayer" Type="Int32" Nullable="false" />
-    <Property Name="SecondPlayer" Type="Int32" Nullable="false" />
-    <Property Name="Winner" Type="Int32" />
-    <NavigationProperty Name="User" Relationship="ServiceDBModel.FK__Games__FirstPlay__5CD6CB2B" FromRole="Game" ToRole="User" />
-    <NavigationProperty Name="User1" Relationship="ServiceDBModel.FK__Games__SecondPla__5DCAEF64" FromRole="Game" ToRole="User" />
-    <NavigationProperty Name="User2" Relationship="ServiceDBModel.FK__Games__Winner__5EBF139D" FromRole="Game" ToRole="User" />
+    <NavigationProperty Name="UMessages" Relationship="ServiceDBModel.FK__UMessages__Sende__36B12243" FromRole="User" ToRole="UMessage" />
   </EntityType>
   <Association Name="FK__Games__FirstPlay__5CD6CB2B">
     <End Type="ServiceDBModel.User" Role="User" Multiplicity="1" />
@@ -82,27 +58,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Games__SecondPla__5DCAEF64">
-    <End Type="ServiceDBModel.User" Role="User" Multiplicity="1" />
-    <End Type="ServiceDBModel.Game" Role="Game" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Game">
-        <PropertyRef Name="SecondPlayer" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Games__Winner__5EBF139D">
+  <Association Name="FK__UMessages__Sende__36B12243">
     <End Type="ServiceDBModel.User" Role="User" Multiplicity="0..1" />
-    <End Type="ServiceDBModel.Game" Role="Game" Multiplicity="*" />
+    <End Type="ServiceDBModel.UMessage" Role="UMessage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Game">
-        <PropertyRef Name="Winner" />
+      <Dependent Role="UMessage">
+        <PropertyRef Name="SenderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RussianRouletteClient.RussianRouletteService;
@@ -29,8 +31,9 @@ namespace RussianRouletteClient
                 
             foreach (var item in _portalProxy.GetUsersList().ToList())
             {
-                if (item == currentUser.NickName)
-                    Invoke(new MethodInvoker(() => lb_usersOnline.Items.Add("*" + item)));
+                if (item == currentUser.NickName) { 
+                    //Invoke(new MethodInvoker(() => lb_usersOnline.Items.Add("*" + item)));
+                }
                 else
                 {
                     Invoke(new MethodInvoker(() => lb_usersOnline.Items.Add(item)));
@@ -61,12 +64,15 @@ namespace RussianRouletteClient
             if (dialogResult == DialogResult.Yes)
             {
                 _portalProxy.AgreeToPlay(user.NickName, currentUser);
+                this.Hide();
+                Thread.Sleep(5000);
+                this.Show();
             }
             else if (dialogResult == DialogResult.No)
             {
                 //do something else
             }
-
+            
             //MessageBox.Show("You have been invited to play by the user " + user.NickName);
         }
 
@@ -74,6 +80,11 @@ namespace RussianRouletteClient
         {
             
             MessageBox.Show("User " + user.NickName + " accepted to play. The game will soon initiate");
+            this.Hide();
+            Thread.Sleep(7000);
+            this.Show();
+
+
         }
 
         public void UserDisconnected(string[] userList, UMessage message)

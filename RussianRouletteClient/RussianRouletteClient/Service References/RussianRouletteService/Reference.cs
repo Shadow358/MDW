@@ -29,6 +29,9 @@ namespace RussianRouletteClient.RussianRouletteService {
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RussianRouletteClient.RussianRouletteService.Game[] GamesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -75,6 +78,19 @@ namespace RussianRouletteClient.RussianRouletteService {
                 if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
                     this.FirstNameField = value;
                     this.RaisePropertyChanged("FirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RussianRouletteClient.RussianRouletteService.Game[] Games {
+            get {
+                return this.GamesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GamesField, value) != true)) {
+                    this.GamesField = value;
+                    this.RaisePropertyChanged("Games");
                 }
             }
         }
@@ -140,6 +156,115 @@ namespace RussianRouletteClient.RussianRouletteService {
                 if ((object.ReferenceEquals(this.UMessagesField, value) != true)) {
                     this.UMessagesField = value;
                     this.RaisePropertyChanged("UMessages");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Game", Namespace="http://schemas.datacontract.org/2004/07/RussianRouletteServiceLibrary.Data")]
+    [System.SerializableAttribute()]
+    public partial class Game : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FirstPlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SecondPlayerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RussianRouletteClient.RussianRouletteService.User UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> WinnerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FirstPlayer {
+            get {
+                return this.FirstPlayerField;
+            }
+            set {
+                if ((this.FirstPlayerField.Equals(value) != true)) {
+                    this.FirstPlayerField = value;
+                    this.RaisePropertyChanged("FirstPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SecondPlayer {
+            get {
+                return this.SecondPlayerField;
+            }
+            set {
+                if ((this.SecondPlayerField.Equals(value) != true)) {
+                    this.SecondPlayerField = value;
+                    this.RaisePropertyChanged("SecondPlayer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RussianRouletteClient.RussianRouletteService.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Winner {
+            get {
+                return this.WinnerField;
+            }
+            set {
+                if ((this.WinnerField.Equals(value) != true)) {
+                    this.WinnerField = value;
+                    this.RaisePropertyChanged("Winner");
                 }
             }
         }

@@ -41,30 +41,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Games__SecondPla__5DCAEF64">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Games" Type="Self.Games" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Games">
-        <PropertyRef Name="SecondPlayer" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Games__Winner__5EBF139D">
-    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-    <End Role="Games" Type="Self.Games" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Games">
-        <PropertyRef Name="Winner" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__UMessages__Sende__36B12243">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="UMessages" Type="Self.UMessages" Multiplicity="*" />
@@ -82,14 +58,6 @@
     <EntitySet Name="UMessages" EntityType="Self.UMessages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Games__FirstPlay__5CD6CB2B" Association="Self.FK__Games__FirstPlay__5CD6CB2B">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Games" EntitySet="Games" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Games__SecondPla__5DCAEF64" Association="Self.FK__Games__SecondPla__5DCAEF64">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Games" EntitySet="Games" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Games__Winner__5EBF139D" Association="Self.FK__Games__Winner__5EBF139D">
       <End Role="Users" EntitySet="Users" />
       <End Role="Games" EntitySet="Games" />
     </AssociationSet>

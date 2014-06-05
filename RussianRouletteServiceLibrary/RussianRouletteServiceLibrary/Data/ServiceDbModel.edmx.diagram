@@ -5,14 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c8008cca51934304b7e98eb74189f47b" Name="Diagram1">
-        <EntityTypeShape EntityType="ServiceDBModel.UMessage" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="ServiceDBModel.User" Width="1.5" PointX="0.75" PointY="1" />
-        <AssociationConnector Association="ServiceDBModel.FK__UMessages__Sende__36B12243" />
-        <EntityTypeShape EntityType="ServiceDBModel.Game" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="ServiceDBModel.Game" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="ServiceDBModel.UMessage" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="ServiceDBModel.User" Width="1.5" PointX="0.75" PointY="2.125" />
         <AssociationConnector Association="ServiceDBModel.FK__Games__FirstPlay__5CD6CB2B" />
-        <AssociationConnector Association="ServiceDBModel.FK__Games__SecondPla__5DCAEF64" />
-        <AssociationConnector Association="ServiceDBModel.FK__Games__Winner__5EBF139D" />
-        </Diagram>
+        <AssociationConnector Association="ServiceDBModel.FK__UMessages__Sende__36B12243" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

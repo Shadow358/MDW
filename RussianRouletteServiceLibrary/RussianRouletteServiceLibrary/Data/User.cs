@@ -7,26 +7,38 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace RussianRouletteServiceLibrary.Data
 {
+    using System;
     using System.Collections.Generic;
     
+    [DataContract]
     public partial class User
     {
         public User()
         {
-            this.UMessages = new List<UMessage>();
-            this.Games = new List<Game>();
+            this.Games = new HashSet<Game>();
+            this.UMessages = new HashSet<UMessage>();
         }
     
+        [DataMember]
         public int Id { get; set; }
+        [DataMember]
         public string NickName { get; set; }
+        [DataMember]
         public string FirstName { get; set; }
+        [DataMember]
         public string LastName { get; set; }
+        [DataMember]
         public string Email { get; set; }
+        [DataMember]
         public string Password { get; set; }
     
-        public virtual ICollection<UMessage> UMessages { get; set; }
+        [DataMember]
         public virtual ICollection<Game> Games { get; set; }
+        [DataMember]
+        public virtual ICollection<UMessage> UMessages { get; set; }
     }
 }

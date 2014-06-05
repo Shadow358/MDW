@@ -95,16 +95,16 @@
     </EntityDeploy>
     <None Include="Data\ServiceDbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ServiceDbModel.edmx</DependentUpon>
       <LastGenOutput>ServiceDbModel.Context.cs</LastGenOutput>
+      <DependentUpon>ServiceDbModel.edmx</DependentUpon>
     </None>
     <None Include="Data\ServiceDbModel.edmx.diagram">
       <DependentUpon>ServiceDbModel.edmx</DependentUpon>
     </None>
     <None Include="Data\ServiceDbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ServiceDbModel.edmx</DependentUpon>
       <LastGenOutput>ServiceDbModel.cs</LastGenOutput>
+      <DependentUpon>ServiceDbModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
