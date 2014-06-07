@@ -194,6 +194,12 @@ namespace RussianRouletteClient.RussianRouletteService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> WinnerField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool[] _cylinderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RussianRouletteClient.RussianRouletteService.User[] playerListField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -265,6 +271,32 @@ namespace RussianRouletteClient.RussianRouletteService {
                 if ((this.WinnerField.Equals(value) != true)) {
                     this.WinnerField = value;
                     this.RaisePropertyChanged("Winner");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool[] _cylinder {
+            get {
+                return this._cylinderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this._cylinderField, value) != true)) {
+                    this._cylinderField = value;
+                    this.RaisePropertyChanged("_cylinder");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RussianRouletteClient.RussianRouletteService.User[] playerList {
+            get {
+                return this.playerListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.playerListField, value) != true)) {
+                    this.playerListField = value;
+                    this.RaisePropertyChanged("playerList");
                 }
             }
         }
@@ -393,52 +425,52 @@ namespace RussianRouletteClient.RussianRouletteService {
     public interface IGame {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Play", ReplyAction="http://tempuri.org/IGame/PlayResponse")]
-        void Play(RussianRouletteClient.RussianRouletteService.User user);
+        void Play(int gameId, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Play", ReplyAction="http://tempuri.org/IGame/PlayResponse")]
-        System.Threading.Tasks.Task PlayAsync(RussianRouletteClient.RussianRouletteService.User user);
+        System.Threading.Tasks.Task PlayAsync(int gameId, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PlaceBullet", ReplyAction="http://tempuri.org/IGame/PlaceBulletResponse")]
-        void PlaceBullet(int cylinderHole, RussianRouletteClient.RussianRouletteService.User user);
+        void PlaceBullet(int gameId, int cylinderHole, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/PlaceBullet", ReplyAction="http://tempuri.org/IGame/PlaceBulletResponse")]
-        System.Threading.Tasks.Task PlaceBulletAsync(int cylinderHole, RussianRouletteClient.RussianRouletteService.User user);
+        System.Threading.Tasks.Task PlaceBulletAsync(int gameId, int cylinderHole, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/SpinCylinder", ReplyAction="http://tempuri.org/IGame/SpinCylinderResponse")]
-        void SpinCylinder();
+        void SpinCylinder(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/SpinCylinder", ReplyAction="http://tempuri.org/IGame/SpinCylinderResponse")]
-        System.Threading.Tasks.Task SpinCylinderAsync();
+        System.Threading.Tasks.Task SpinCylinderAsync(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Shoot", ReplyAction="http://tempuri.org/IGame/ShootResponse")]
-        bool Shoot(RussianRouletteClient.RussianRouletteService.User player, int chosenHole);
+        bool Shoot(int gameId, RussianRouletteClient.RussianRouletteService.User player, int chosenHole);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Shoot", ReplyAction="http://tempuri.org/IGame/ShootResponse")]
-        System.Threading.Tasks.Task<bool> ShootAsync(RussianRouletteClient.RussianRouletteService.User player, int chosenHole);
+        System.Threading.Tasks.Task<bool> ShootAsync(int gameId, RussianRouletteClient.RussianRouletteService.User player, int chosenHole);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/SendMessage")]
-        void SendMessage(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
+        void SendMessage(int gameId, RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
+        System.Threading.Tasks.Task SendMessageAsync(int gameId, RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DetermineWinner", ReplyAction="http://tempuri.org/IGame/DetermineWinnerResponse")]
-        void DetermineWinner();
+        void DetermineWinner(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DetermineWinner", ReplyAction="http://tempuri.org/IGame/DetermineWinnerResponse")]
-        System.Threading.Tasks.Task DetermineWinnerAsync();
+        System.Threading.Tasks.Task DetermineWinnerAsync(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Rematch", ReplyAction="http://tempuri.org/IGame/RematchResponse")]
-        void Rematch();
+        void Rematch(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Rematch", ReplyAction="http://tempuri.org/IGame/RematchResponse")]
-        System.Threading.Tasks.Task RematchAsync();
+        System.Threading.Tasks.Task RematchAsync(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Leave", ReplyAction="http://tempuri.org/IGame/LeaveResponse")]
-        void Leave(RussianRouletteClient.RussianRouletteService.User user);
+        void Leave(int gameId, RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Leave", ReplyAction="http://tempuri.org/IGame/LeaveResponse")]
-        System.Threading.Tasks.Task LeaveAsync(RussianRouletteClient.RussianRouletteService.User user);
+        System.Threading.Tasks.Task LeaveAsync(int gameId, RussianRouletteClient.RussianRouletteService.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -497,68 +529,68 @@ namespace RussianRouletteClient.RussianRouletteService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Play(RussianRouletteClient.RussianRouletteService.User user) {
-            base.Channel.Play(user);
+        public void Play(int gameId, RussianRouletteClient.RussianRouletteService.User user) {
+            base.Channel.Play(gameId, user);
         }
         
-        public System.Threading.Tasks.Task PlayAsync(RussianRouletteClient.RussianRouletteService.User user) {
-            return base.Channel.PlayAsync(user);
+        public System.Threading.Tasks.Task PlayAsync(int gameId, RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.PlayAsync(gameId, user);
         }
         
-        public void PlaceBullet(int cylinderHole, RussianRouletteClient.RussianRouletteService.User user) {
-            base.Channel.PlaceBullet(cylinderHole, user);
+        public void PlaceBullet(int gameId, int cylinderHole, RussianRouletteClient.RussianRouletteService.User user) {
+            base.Channel.PlaceBullet(gameId, cylinderHole, user);
         }
         
-        public System.Threading.Tasks.Task PlaceBulletAsync(int cylinderHole, RussianRouletteClient.RussianRouletteService.User user) {
-            return base.Channel.PlaceBulletAsync(cylinderHole, user);
+        public System.Threading.Tasks.Task PlaceBulletAsync(int gameId, int cylinderHole, RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.PlaceBulletAsync(gameId, cylinderHole, user);
         }
         
-        public void SpinCylinder() {
-            base.Channel.SpinCylinder();
+        public void SpinCylinder(int gameId) {
+            base.Channel.SpinCylinder(gameId);
         }
         
-        public System.Threading.Tasks.Task SpinCylinderAsync() {
-            return base.Channel.SpinCylinderAsync();
+        public System.Threading.Tasks.Task SpinCylinderAsync(int gameId) {
+            return base.Channel.SpinCylinderAsync(gameId);
         }
         
-        public bool Shoot(RussianRouletteClient.RussianRouletteService.User player, int chosenHole) {
-            return base.Channel.Shoot(player, chosenHole);
+        public bool Shoot(int gameId, RussianRouletteClient.RussianRouletteService.User player, int chosenHole) {
+            return base.Channel.Shoot(gameId, player, chosenHole);
         }
         
-        public System.Threading.Tasks.Task<bool> ShootAsync(RussianRouletteClient.RussianRouletteService.User player, int chosenHole) {
-            return base.Channel.ShootAsync(player, chosenHole);
+        public System.Threading.Tasks.Task<bool> ShootAsync(int gameId, RussianRouletteClient.RussianRouletteService.User player, int chosenHole) {
+            return base.Channel.ShootAsync(gameId, player, chosenHole);
         }
         
-        public void SendMessage(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message) {
-            base.Channel.SendMessage(user, message);
+        public void SendMessage(int gameId, RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message) {
+            base.Channel.SendMessage(gameId, user, message);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message) {
-            return base.Channel.SendMessageAsync(user, message);
+        public System.Threading.Tasks.Task SendMessageAsync(int gameId, RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message) {
+            return base.Channel.SendMessageAsync(gameId, user, message);
         }
         
-        public void DetermineWinner() {
-            base.Channel.DetermineWinner();
+        public void DetermineWinner(int gameId) {
+            base.Channel.DetermineWinner(gameId);
         }
         
-        public System.Threading.Tasks.Task DetermineWinnerAsync() {
-            return base.Channel.DetermineWinnerAsync();
+        public System.Threading.Tasks.Task DetermineWinnerAsync(int gameId) {
+            return base.Channel.DetermineWinnerAsync(gameId);
         }
         
-        public void Rematch() {
-            base.Channel.Rematch();
+        public void Rematch(int gameId) {
+            base.Channel.Rematch(gameId);
         }
         
-        public System.Threading.Tasks.Task RematchAsync() {
-            return base.Channel.RematchAsync();
+        public System.Threading.Tasks.Task RematchAsync(int gameId) {
+            return base.Channel.RematchAsync(gameId);
         }
         
-        public void Leave(RussianRouletteClient.RussianRouletteService.User user) {
-            base.Channel.Leave(user);
+        public void Leave(int gameId, RussianRouletteClient.RussianRouletteService.User user) {
+            base.Channel.Leave(gameId, user);
         }
         
-        public System.Threading.Tasks.Task LeaveAsync(RussianRouletteClient.RussianRouletteService.User user) {
-            return base.Channel.LeaveAsync(user);
+        public System.Threading.Tasks.Task LeaveAsync(int gameId, RussianRouletteClient.RussianRouletteService.User user) {
+            return base.Channel.LeaveAsync(gameId, user);
         }
     }
     
@@ -643,7 +675,7 @@ namespace RussianRouletteClient.RussianRouletteService {
         void InvitedToPlay(RussianRouletteClient.RussianRouletteService.User user);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/AgreedToPlay")]
-        void AgreedToPlay(RussianRouletteClient.RussianRouletteService.User user);
+        void AgreedToPlay(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPortal/UserDisconnected")]
         void UserDisconnected(string[] userList, RussianRouletteClient.RussianRouletteService.UMessage message);

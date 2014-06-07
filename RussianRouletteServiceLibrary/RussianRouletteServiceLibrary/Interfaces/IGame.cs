@@ -62,28 +62,28 @@ namespace RussianRouletteServiceLibrary.Interfaces
     public interface IGame
     {
         [OperationContract]
-        void Play(User user);
+        void Play(int gameId, User user);
 
         [OperationContract]
-        void PlaceBullet(int cylinderHole, User user);
+        void PlaceBullet(int gameId, int cylinderHole, User user);
 
         [OperationContract]
-        void SpinCylinder();
+        void SpinCylinder(int gameId);
 
         [OperationContract]
-        bool Shoot(User player, int chosenHole);
+        bool Shoot(int gameId, User player, int chosenHole);
 
         [OperationContract(IsOneWay = true)]
-        void SendMessage(User user,UMessage message);
+        void SendMessage(int gameId, User user, UMessage message);
 
         [OperationContract]
-        void DetermineWinner();
+        void DetermineWinner(int gameId);
 
         [OperationContract]
-        void Rematch();
+        void Rematch(int gameId);
 
         [OperationContract]
-        void Leave(User user);
+        void Leave(int gameId, User user);
 
 
     }

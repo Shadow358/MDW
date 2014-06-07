@@ -22,8 +22,8 @@ namespace RussianRouletteClient
         public void PlayerSentMessage(User user, UMessage message)
         {
             //MessageBox.Show(user.NickName + " " + message.MessageContent);
-            
-            string nickname = user.NickName == clientUser.NickName ? "You" : user.NickName;
+
+            string nickname = user.NickName == gameUser.NickName ? "You" : user.NickName;
             Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add(nickname + " : " + message.MessageContent)));
             
             //lb_ChatBox.Items.Add(nickname + " : " + message.MessageContent);
@@ -77,16 +77,18 @@ namespace RussianRouletteClient
 
         private GameClient _gameClient = null;
         private InstanceContext _instance = null;
-        private User clientUser = new User(){ Email = "zigm4s@gmail.com", Id = 0, FirstName = "Zigmas", LastName = "Slusnys", NickName = "Ziggy", Password = "test123"};
-
+        private User gameUser = null;// = new User(){ Email = "zigm4s@gmail.com", Id = 0, FirstName = "Zigmas", LastName = "Slusnys", NickName = "Ziggy", Password = "test123"};
+        private int currentGameId;
 
 
         private int cylinderCounter = 0; 
 
 
-        public GameForm()
+        public GameForm(User portalUser, int gameId)
         {
             string state;
+            currentGameId = gameId;
+            gameUser = portalUser;
 
             
             if (_gameClient != null)
@@ -99,15 +101,17 @@ namespace RussianRouletteClient
             {
 
                 _gameClient = new GameClient(new InstanceContext(this));
-                MessageBox.Show(_gameClient.State.ToString());
+                //MessageBox.Show(_gameClient.State.ToString());
             }
 
             InitializeComponent();
 
+            Text = "You are: " + gameUser.NickName + " Game number: " + gameId;
+
             try
             {
                 _gameClient.Open();
-                _gameClient.Play(clientUser);
+                _gameClient.Play(currentGameId, gameUser);
             }
             catch (Exception ex)
             {
@@ -118,7 +122,7 @@ namespace RussianRouletteClient
 
         private void btn_Spin_Click(object sender, EventArgs e)
         {
-            _gameClient.SpinCylinder();
+            _gameClient.SpinCylinder(currentGameId);
         }
 
         private void btn_Play_Click(object sender, EventArgs e)
@@ -128,25 +132,25 @@ namespace RussianRouletteClient
 
         private void btn_Rematch_Click(object sender, EventArgs e)
         {
-            _gameClient.Rematch();
+            _gameClient.Rematch(currentGameId);
         }
 
         private void btn_Fire_Click(object sender, EventArgs e)
         {
-            _gameClient.Shoot(clientUser, cylinderCounter);
+            _gameClient.Shoot(currentGameId, gameUser, cylinderCounter);
         }
 
         private void btn_SendMessage_Click(object sender, EventArgs e)
         {
             try
             {
-                _gameClient.SendMessage(this.clientUser,
+                _gameClient.SendMessage(currentGameId, this.gameUser,
                     new UMessage()
                     {
                         MessageContent = tb_GameChat.Text,
                         TimeSent = DateTime.Now,
-                        SenderId = clientUser.Id,
-                        User = clientUser
+                        SenderId = gameUser.Id,
+                        User = gameUser
                         
                     });
             }
@@ -161,15 +165,15 @@ namespace RussianRouletteClient
             try {
                 if (_gameClient.State != System.ServiceModel.CommunicationState.Faulted)
                 {
-                    MessageBox.Show("Closing client");
-                    _gameClient.Leave(clientUser);
+                    //MessageBox.Show("Closing client");
+                    _gameClient.Leave(currentGameId, gameUser);
                     _gameClient.ChannelFactory.Close();
                     _gameClient.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Aborting client");
-                    _gameClient.Leave(clientUser);
+                    //MessageBox.Show("Aborting client");
+                    _gameClient.Leave(currentGameId, gameUser);
                     _gameClient.Abort();
                 }
                 }

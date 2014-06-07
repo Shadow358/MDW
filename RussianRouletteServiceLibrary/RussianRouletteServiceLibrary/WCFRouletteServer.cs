@@ -1,4 +1,5 @@
-﻿using RussianRouletteServiceLibrary.Interfaces;
+﻿using System.Runtime.CompilerServices;
+using RussianRouletteServiceLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +17,18 @@ namespace RussianRouletteServiceLibrary
         //Database object
         ServiceContext db = new ServiceContext();
       
-        public bool[] _cylinder = new bool[6];
+        
 
-      private Action<User, UMessage> gameCallbacks = delegate { };
+      //private Action<User, UMessage> gameCallbacks = delegate { };
       
-        public IGameCallback CurrentGameCallback
-        {
-            get
-            {
-                return OperationContext.Current.
-                       GetCallbackChannel<IGameCallback>();
-            }
-        }
+        //public IGameCallback CurrentGameCallback
+        //{
+        //    get
+        //    {
+        //        return OperationContext.Current.
+        //               GetCallbackChannel<IGameCallback>();
+        //    }
+        //}
 
         public IPortalCallback CurrentPortalCallback
         {
@@ -43,7 +44,7 @@ namespace RussianRouletteServiceLibrary
             return portalClientsDictionary.Keys.Any(c => c.NickName == nickname);
         }
 
-        Dictionary<User, IGameCallback> clients = new Dictionary<User, IGameCallback>();
+        //Dictionary<User, IGameCallback> clients = new Dictionary<User, IGameCallback>();
 
         Dictionary<User, IPortalCallback> portalClientsDictionary = new Dictionary<User, IPortalCallback>();
         
@@ -57,24 +58,39 @@ namespace RussianRouletteServiceLibrary
         //NEW STUFF
         object syncObj = new object();
 
+        public Game GetCurrentGame(int gameIdinList)
+        {
+            if (gamesList.First(x => x.Id == gameIdinList) == null)
+            {
+                throw new Exception("There is no such game in the server.");
+            }
+            else
+            {
+                return gamesList.First(x => x.Id == gameIdinList);
+            }
+        }
+
         public WCFRouletteServer()
         {
            
         }
 
-        public void Play(User user)
+        public void Play(int gameId, User user)
         {
-            if (!clients.ContainsValue(CurrentGameCallback) &&
-                !SearchUsersByNickname(user.NickName))
-            {
+
+            var currentGame = GetCurrentGame(gameId);
+
+            //if (!currentGame.gameClientsDictionary.ContainsValue(currentGame.CurrentGameCallback) &&
+            //    !SearchUsersByNickname(user.NickName))
+            //{
                 lock (syncObj)
                 {
-                    clients.Add(user, CurrentGameCallback);
-                    playerList.Add(user);
+                    GetCurrentGame(gameId).gameClientsDictionary.Add(user, currentGame.CurrentGameCallback);
+                    GetCurrentGame(gameId).playerList.Add(user);
 
-                    foreach (User userinList in clients.Keys)
+                    foreach (User userinList in GetCurrentGame(gameId).gameClientsDictionary.Keys)
                     {
-                        IGameCallback callback = clients[userinList];
+                        IGameCallback callback = GetCurrentGame(gameId).gameClientsDictionary[userinList];
                         try
                         {
                             callback.PlayerReady(userinList);
@@ -87,20 +103,20 @@ namespace RussianRouletteServiceLibrary
                     }
 
                 }
-             }
+             //}
 
 
         }
 
-        public void PlaceBullet(int cylinderHole, User user)
+        public void PlaceBullet(int gameId, int cylinderHole, User user)
         {
             lock (syncObj)
             {
-                _cylinder[cylinderHole - 1] = true;
+                GetCurrentGame(gameId)._cylinder[cylinderHole - 1] = true;
 
-                foreach (IGameCallback callback in clients.Values)
+                foreach (IGameCallback callback in GetCurrentGame(gameId).gameClientsDictionary.Values)
                 {
-                    callback.BulletPlaced(user, new UMessage(){ MessageContent = "Bullet has been placed by: " + user.NickName});
+                    callback.BulletPlaced(user, new UMessage() { MessageContent = "Bullet has been placed by: " + user.NickName });
                 }
             }
             
@@ -108,7 +124,7 @@ namespace RussianRouletteServiceLibrary
             
         }
 
-        public void SpinCylinder()
+        public void SpinCylinder(int gameId)
         {
             //gamesList.First(x=>x.Id = 55)
             lock (syncObj)
@@ -116,35 +132,37 @@ namespace RussianRouletteServiceLibrary
                 var rnum = new Random();
                 for (int i = 0; i < 6; i++)
                 {
-                    _cylinder[i] = false;
+                    GetCurrentGame(gameId)._cylinder[i] = false;
                 }
-                _cylinder[rnum.Next(0, 6)] = true;
+                GetCurrentGame(gameId)._cylinder[rnum.Next(0, 6)] = true;
 
-                foreach (IGameCallback callback in clients.Values)
+                foreach (IGameCallback callback in GetCurrentGame(gameId).gameClientsDictionary.Values)
                 {
                     callback.CylinderSpun(new UMessage() { MessageContent = "The cylinder has been spun." });
                 }
             }
         }
 
-        public bool Shoot(User player, int holeChosen)
+        public bool Shoot(int gameId, User player, int holeChosen)
         {
-            if (_cylinder[holeChosen] == false)
+            bool[] cylindras = GetCurrentGame(gameId)._cylinder;
+
+            if (GetCurrentGame(gameId)._cylinder[holeChosen] == false)
             {
-                var oponent = playerList.FirstOrDefault(x => x.NickName != player.NickName);
+                var oponent = GetCurrentGame(gameId).playerList.FirstOrDefault(x => x.NickName != player.NickName);
                 if (oponent != null)
                 {
                     var otherPlayer = oponent.NickName;
-                    clients.FirstOrDefault(x => x.Key.NickName == otherPlayer).Value.YourTurn(player, holeChosen+1);
+                    GetCurrentGame(gameId).gameClientsDictionary.FirstOrDefault(x => x.Key.NickName == otherPlayer).Value.YourTurn(player, holeChosen + 1);
                 }
-                
+
             }
             else
             {
-                foreach (User u in clients.Keys)
+                foreach (User u in GetCurrentGame(gameId).gameClientsDictionary.Keys)
                 {
-                    IGameCallback callback = clients[u];
-                    callback.PlayerLost(player, new UMessage(){MessageContent = player.NickName + " has lost the game by taking a bullet to his forehead."});
+                    IGameCallback callback = GetCurrentGame(gameId).gameClientsDictionary[u];
+                    callback.PlayerLost(player, new UMessage() { MessageContent = player.NickName + " has lost the game by taking a bullet to his forehead." });
                 }
             }
 
@@ -152,48 +170,48 @@ namespace RussianRouletteServiceLibrary
         }
 
         //sends message in game.
-        public void SendMessage(User user, UMessage message)
+        public void SendMessage(int gameId, User user, UMessage message)
         {
             try
             {
-                foreach (User rec in clients.Keys)
+                foreach (User rec in GetCurrentGame(gameId).gameClientsDictionary.Keys)
                 {
-                        IGameCallback callback = clients[rec];
-                        callback.PlayerSentMessage(user, message);
+                    IGameCallback callback = GetCurrentGame(gameId).gameClientsDictionary[rec];
+                    callback.PlayerSentMessage(user, message);
 
                 }
             }
             catch (Exception ex)
             {
-                
-                
+
+
             }
         }
 
-        public void DetermineWinner()
+        public void DetermineWinner(int gameId)
         {
             throw new NotImplementedException();
         }
 
-        public void Rematch()
+        public void Rematch(int gameId)
         {
             throw new NotImplementedException();
         }
 
-        public void Leave(User user)
+        public void Leave(int gameId, User user)
         {
-            foreach (User c in clients.Keys)
+            foreach (User c in GetCurrentGame(gameId).gameClientsDictionary.Keys)
             {
                 if (user.NickName == c.NickName)
                 {
                     lock (syncObj)
                     {
-                        this.clients.Remove(c);
-                        this.portalList.Remove(c);
-                        foreach (IGameCallback callback in clients.Values)
+                        GetCurrentGame(gameId).gameClientsDictionary.Remove(c);
+                        GetCurrentGame(gameId).playerList.Remove(c);
+                        foreach (IGameCallback callback in GetCurrentGame(gameId).gameClientsDictionary.Values)
                         {
                             //callback.RefreshClients(this.clientList);
-                            callback.PlayerLeft(user, new UMessage(){ MessageContent = "Player " +user.NickName + " disconnected."});
+                            callback.PlayerLeft(user, new UMessage() { MessageContent = "Player " + user.NickName + " disconnected." });
                         }
                     }
                     return;
@@ -342,13 +360,45 @@ namespace RussianRouletteServiceLibrary
             db.Games.Add(new Game(firstPlayer: portalList.First(x => x.NickName == Nickname).Id, secondPlayer: user.Id));
             db.SaveChanges();
             
+
             var dbGameList = db.Games.Local.First().Id;
 
 
-            var listas = db.Games.ToList();
+            int gameId = db.Games.ToList().Last().Id;
 
-                portalClientsDictionary[portalClientsDictionary.Keys.First(x=>x.NickName == Nickname)].AgreedToPlay(user);
-                gamesList.Add(new Game(firstPlayer: portalList.First(x => x.NickName == Nickname).Id, secondPlayer: user.Id) { Id = dbGameList});
+                
+                gamesList.Add(new Game(firstPlayer: portalList.First(x => x.NickName == Nickname).Id, secondPlayer: user.Id) { Id = gameId});
+
+            //worked
+                //portalClientsDictionary[portalClientsDictionary.Keys.First(x => x.NickName == Nickname)].AgreedToPlay(user, gameId);
+
+                lock (syncObj)
+                {
+                    //GetCurrentGame(gameId).gameClientsDictionary.Add(user, GetCurrentGame(gameId).CurrentGameCallback);
+                    //GetCurrentGame(gameId).playerList.Add(user);
+
+                    //GetCurrentGame(gameId).gameClientsDictionary.Add(portalClientsDictionary.Keys.First(x => x.NickName == Nickname), GetCurrentGame(gameId).CurrentGameCallback);
+
+                    foreach (User userinList in portalClientsDictionary.Keys.Where(x=>x.NickName == Nickname || x.NickName == user.NickName))
+                    {
+                        IPortalCallback callback = portalClientsDictionary[userinList];
+                        try
+                        {
+                            callback.AgreedToPlay(gameId);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+
+                    }
+
+                }
+            ////worked
+            //    portalClientsDictionary[portalClientsDictionary.
+            //        Keys.First(x => x.NickName == user.NickName)]
+            //        .AgreedToPlay(portalClientsDictionary.Keys.FirstOrDefault(x=>x.NickName==Nickname), gameId);
+
 
                //portalClientsDictionary[portalClientsDictionary.Keys.First(x => x.NickName == Nickname && x.NickName == user.NickName)].AgreedToPlay(user);
             

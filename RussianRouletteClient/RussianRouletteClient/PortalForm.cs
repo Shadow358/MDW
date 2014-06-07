@@ -31,8 +31,10 @@ namespace RussianRouletteClient
                 
             foreach (var item in _portalProxy.GetUsersList().ToList())
             {
-                if (item == currentUser.NickName) { 
+                if (item == currentUser.NickName) {
                     //Invoke(new MethodInvoker(() => lb_usersOnline.Items.Add("*" + item)));
+                    Invoke(new MethodInvoker(() => Text = "Russian Roulette :: Welcome " + currentUser.NickName));
+
                 }
                 else
                 {
@@ -42,6 +44,7 @@ namespace RussianRouletteClient
 
             if(message.User.NickName != currentUser.NickName)
             Invoke(new MethodInvoker(() => lb_publicChat.Items.Add(DateTime.Now + message.MessageContent)));
+
 
             //lb_usersOnline.DataSource = userList;
             //MessageBox.Show(message.MessageContent);
@@ -64,9 +67,10 @@ namespace RussianRouletteClient
             if (dialogResult == DialogResult.Yes)
             {
                 _portalProxy.AgreeToPlay(user.NickName, currentUser);
-                this.Hide();
-                Thread.Sleep(5000);
-                this.Show();
+                //this.Hide();
+                //Thread.Sleep(5000);
+                //this.Show();
+                //GameForm gameForm = new GameForm(currentUser, gameId: 1);
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -76,26 +80,27 @@ namespace RussianRouletteClient
             //MessageBox.Show("You have been invited to play by the user " + user.NickName);
         }
 
-        public void AgreedToPlay(User user)
+        public void AgreedToPlay(int gameId)
         {
-            
-            MessageBox.Show("User " + user.NickName + " accepted to play. The game will soon initiate");
-            this.Hide();
-            Thread.Sleep(7000);
-            this.Show();
+
+            //Invoke(new MethodInvoker(() => Portalfor));
+            //this.Hide();
+            //Thread.Sleep(7000);
+            //this.Show();
+            GameForm gameForm = new GameForm(currentUser, gameId: gameId);
+            gameForm.ShowDialog();
+            //MessageBox.Show("User accepted to play. The game will soon initiate");
 
 
         }
 
         public void UserDisconnected(string[] userList, UMessage message)
         {
-           Invoke(new MethodInvoker(() => lb_usersOnline.Items.Clear()));
-                
+            Invoke(new MethodInvoker(() => lb_usersOnline.Items.Clear()));
+
             foreach (var item in _portalProxy.GetUsersList().ToList())
             {
-                if (item == currentUser.NickName)
-                    Invoke(new MethodInvoker(() => lb_usersOnline.Items.Add("*" + item)));
-                else
+                if (item != currentUser.NickName)
                 {
                     Invoke(new MethodInvoker(() => lb_usersOnline.Items.Add(item)));
                 }
@@ -128,16 +133,23 @@ namespace RussianRouletteClient
 
         public PortalForm(User portalUser)
         {
-            _portalProxy = new PortalClient(new InstanceContext(this));
+            
 
+            _portalProxy = new PortalClient(new InstanceContext(this));
+            
             InitializeComponent();
+
+            currentUser = portalUser;
+            
+            
             try
             {
 
-
+                
                 _portalProxy.Open();
 
-                currentUser = portalUser;
+                
+                
             }
             catch (Exception ex)
             {

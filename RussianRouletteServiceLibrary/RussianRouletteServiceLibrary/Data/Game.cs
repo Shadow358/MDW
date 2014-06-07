@@ -7,7 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Linq;
 using System.Runtime.Serialization;
+using System.ServiceModel;
+using RussianRouletteServiceLibrary.Interfaces;
 
 namespace RussianRouletteServiceLibrary.Data
 {
@@ -29,6 +32,10 @@ namespace RussianRouletteServiceLibrary.Data
         [DataMember]
         public virtual User User { get; set; }
 
+        [DataMember] public bool[] _cylinder;
+
+        [DataMember] public List<User> playerList;
+
         [Obsolete("Only needed for serialization and materialization", true)]
         public Game()
         {
@@ -40,6 +47,24 @@ namespace RussianRouletteServiceLibrary.Data
             //this.Id = id;
             this.FirstPlayer = firstPlayer;
             this.SecondPlayer = secondPlayer;
+            _cylinder = new bool[6];
+            playerList = new List<User>();
         }
+
+        public IGameCallback CurrentGameCallback
+        {
+            get
+            {
+                return OperationContext.Current.
+                       GetCallbackChannel<IGameCallback>();
+            }
+        }
+
+        public bool SearchUsersByNickname(string nickname)
+        {
+            return gameClientsDictionary.Keys.Any(c => c.NickName == nickname);
+        }
+
+        public Dictionary<User, IGameCallback> gameClientsDictionary = new Dictionary<User, IGameCallback>();
     }
 }

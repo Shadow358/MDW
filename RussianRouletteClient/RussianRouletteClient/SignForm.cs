@@ -55,7 +55,7 @@ namespace RussianRouletteClient
             throw new NotImplementedException();
         }
 
-         public void AgreedToPlay(User user)
+         public void AgreedToPlay(int gameId)
          {
              throw new NotImplementedException();
          }
@@ -85,13 +85,14 @@ namespace RussianRouletteClient
 
          
         public StartForm()
-       {
-
+        {
+            
                _portalClient = new PortalClient(new InstanceContext(this));
                
 
            
             InitializeComponent();
+            Text = "Welcome to Russian Roulette!";
             _portalClient.Open();
             
         }

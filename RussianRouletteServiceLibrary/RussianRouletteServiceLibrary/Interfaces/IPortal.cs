@@ -69,7 +69,7 @@ namespace RussianRouletteServiceLibrary.Interfaces
         void InvitedToPlay(User user);
 
         [OperationContract(IsOneWay = true)]
-        void AgreedToPlay(User user);
+        void AgreedToPlay(int gameId);
 
         [OperationContract(IsOneWay = true)]
         void UserDisconnected(List<string> userList, UMessage message);

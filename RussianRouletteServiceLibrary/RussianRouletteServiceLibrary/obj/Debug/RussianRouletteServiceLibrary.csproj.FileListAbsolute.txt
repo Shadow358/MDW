@@ -36,3 +36,4 @@ C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRou
 C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.dll
 C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.pdb
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.csprojResolveAssemblyReference.cache
