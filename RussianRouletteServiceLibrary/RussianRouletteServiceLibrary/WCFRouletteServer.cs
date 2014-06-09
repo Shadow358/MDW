@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Data.Entity;
+using System.Runtime.CompilerServices;
 using RussianRouletteServiceLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,18 +18,6 @@ namespace RussianRouletteServiceLibrary
         //Database object
         ServiceContext db = new ServiceContext();
       
-        
-
-      //private Action<User, UMessage> gameCallbacks = delegate { };
-      
-        //public IGameCallback CurrentGameCallback
-        //{
-        //    get
-        //    {
-        //        return OperationContext.Current.
-        //               GetCallbackChannel<IGameCallback>();
-        //    }
-        //}
 
         public IPortalCallback CurrentPortalCallback
         {
@@ -44,13 +33,8 @@ namespace RussianRouletteServiceLibrary
             return portalClientsDictionary.Keys.Any(c => c.NickName == nickname);
         }
 
-        //Dictionary<User, IGameCallback> clients = new Dictionary<User, IGameCallback>();
-
         Dictionary<User, IPortalCallback> portalClientsDictionary = new Dictionary<User, IPortalCallback>();
         
-
-        List<User> playerList = new List<User>();
-
         List<User> portalList = new List<User>();
 
         List<Game> gamesList = new List<Game>();   
@@ -164,6 +148,10 @@ namespace RussianRouletteServiceLibrary
                     IGameCallback callback = GetCurrentGame(gameId).gameClientsDictionary[u];
                     callback.PlayerLost(player, new UMessage() { MessageContent = player.NickName + " has lost the game by taking a bullet to his forehead." });
                 }
+                var changedGame = db.Games.First(x => x.Id == gameId);
+                changedGame.Id = player.Id;
+                db.Entry(changedGame).State = EntityState.Modified;
+                db.SaveChanges();
             }
 
             return false;
