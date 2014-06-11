@@ -42,10 +42,18 @@ namespace RussianRouletteClient
                 }
             }
 
-            if(message.User.NickName != currentUser.NickName)
-            Invoke(new MethodInvoker(() => lb_publicChat.Items.Add(DateTime.Now + message.MessageContent)));
-
-
+            if (message.User.NickName != currentUser.NickName)
+            {
+                Invoke(
+                    new MethodInvoker(
+                        () =>
+                            ChatBox.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] System message: " +
+                                               message.MessageContent + "\n")));
+                Invoke(
+                    new MethodInvoker(
+                        () =>
+                ChatBox.ScrollToCaret()));
+            }
             //lb_usersOnline.DataSource = userList;
             //MessageBox.Show(message.MessageContent);
         }
@@ -107,7 +115,17 @@ namespace RussianRouletteClient
             }
 
             if (message.User.NickName != currentUser.NickName)
-                Invoke(new MethodInvoker(() => lb_publicChat.Items.Add(DateTime.Now + message.MessageContent)));
+            {
+                Invoke(
+                    new MethodInvoker(
+                        () =>
+                            ChatBox.AppendText("[" + DateTime.Now.ToString("HH:mm:ss") + "] System message: " +
+                                               message.MessageContent + "\n")));
+                Invoke(
+                    new MethodInvoker(
+                        () =>
+                ChatBox.ScrollToCaret()));
+            }
         }
 
         public void GetUserList(User[] users)
@@ -118,7 +136,12 @@ namespace RussianRouletteClient
         public void OnPublicMessageSent(User user, UMessage message)
         {
             string nickname = user.NickName == currentUser.NickName ? "You" : user.NickName;
-            Invoke(new MethodInvoker(() => lb_publicChat.Items.Add(nickname + " : " + message.MessageContent)));
+            //Invoke(new MethodInvoker(() => lb_publicChat.Items.Add(nickname + " : " + message.MessageContent)));
+            Invoke(new MethodInvoker(() => ChatBox.AppendText(("[" +DateTime.Now.ToString("HH:mm:ss")+"] " + nickname + " : " + message.MessageContent+"\n"))));
+            Invoke(
+                    new MethodInvoker(
+                        () =>
+                ChatBox.ScrollToCaret()));
         }
 
         public void OnPrivateMessageSent(User user, UMessage message)
@@ -161,6 +184,7 @@ namespace RussianRouletteClient
 
                 _portalProxy.SignIn(currentUser);
             }
+            this.AcceptButton = btn_SendMessage;
         }
 
         private void PortalForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -189,6 +213,7 @@ namespace RussianRouletteClient
         private void btn_SendMessage_Click(object sender, EventArgs e)
         {
             _portalProxy.SendPublicMessage(currentUser, new UMessage(){ MessageContent = typeBox.Text, TimeSent = DateTime.Now});
+            typeBox.Text = "";
         }
 
         private void lb_usersOnline_Click(object sender, EventArgs e)
@@ -205,6 +230,26 @@ namespace RussianRouletteClient
 
 
             lb_usersOnline.ContextMenu = cm;
+        }
+
+        private void typeBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.KeyCode == Keys.Return)
+            //{
+            //    btn_SendMessage_Click(sender, e);
+            //}
+        }
+
+        private void Top10ListBox_SelectedIndexChanged(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage.Name == "tabPage2")
+            {
+                Top10ListBox.Items.Clear();
+                foreach (string s in _portalProxy.ReceiveTopPlayers())
+                {
+                    Top10ListBox.Items.Add(s);
+                }
+            }
         }
     }
 }

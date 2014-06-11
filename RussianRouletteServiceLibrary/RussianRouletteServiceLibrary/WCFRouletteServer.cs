@@ -37,6 +37,8 @@ namespace RussianRouletteServiceLibrary
         
         List<User> portalList = new List<User>();
 
+        List<string> topPlayersList = new List<string>();
+
         List<Game> gamesList = new List<Game>();   
 
         //NEW STUFF
@@ -129,17 +131,16 @@ namespace RussianRouletteServiceLibrary
 
         public bool Shoot(int gameId, User player, int holeChosen)
         {
-            bool[] cylindras = GetCurrentGame(gameId)._cylinder;
-
+           
+            var oponent = GetCurrentGame(gameId).playerList.FirstOrDefault(x => x.NickName != player.NickName);
+            
             if (GetCurrentGame(gameId)._cylinder[holeChosen] == false)
             {
-                var oponent = GetCurrentGame(gameId).playerList.FirstOrDefault(x => x.NickName != player.NickName);
                 if (oponent != null)
                 {
                     var otherPlayer = oponent.NickName;
                     GetCurrentGame(gameId).gameClientsDictionary.FirstOrDefault(x => x.Key.NickName == otherPlayer).Value.YourTurn(player, holeChosen + 1);
                 }
-
             }
             else
             {
@@ -148,9 +149,22 @@ namespace RussianRouletteServiceLibrary
                     IGameCallback callback = GetCurrentGame(gameId).gameClientsDictionary[u];
                     callback.PlayerLost(player, new UMessage() { MessageContent = player.NickName + " has lost the game by taking a bullet to his forehead." });
                 }
-                var changedGame = db.Games.First(x => x.Id == gameId);
-                changedGame.Id = player.Id;
-                db.Entry(changedGame).State = EntityState.Modified;
+
+                //Saving winning user ID to database Game column of specific game.
+                var setWinner = db.Games.First(x => x.Id == gameId);
+                if (oponent != null) setWinner.Winner = oponent.Id;
+                db.Entry(setWinner).State = EntityState.Modified;
+
+                //Updating wins column in users table to count how many wins user has made.
+                var winCounter = db.Users.First(x=> x.Id == oponent.Id);
+                winCounter.Wins += 1;
+                //.AsNoTracking fixes error:
+                //Attaching an entity of type 'ContosoUniversity.Models.Department' failed because another entity of the same type already has the same primary key value.
+                //error
+
+                //db.Users.Attach(winCounter);
+                db.Entry(winCounter).State = EntityState.Modified;
+
                 db.SaveChanges();
             }
 
@@ -176,10 +190,10 @@ namespace RussianRouletteServiceLibrary
             }
         }
 
-        public void DetermineWinner(int gameId)
-        {
-            throw new NotImplementedException();
-        }
+        //public void DetermineWinner(int gameId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public void Rematch(int gameId)
         {
@@ -308,6 +322,19 @@ namespace RussianRouletteServiceLibrary
             }
         }
 
+
+        public List<string> ReceiveTopPlayers()
+        {
+            var topplayers = db.Users.Select(x => new {x.NickName, x.Wins}).OrderByDescending(x => x.Wins).Take(10);
+            topPlayersList.Clear();
+            int counter = 1;
+            foreach (var player in topplayers)
+            {
+                topPlayersList.Add(counter.ToString()+ ". " +player.NickName +" Total Wins:"+ player.Wins);
+                counter++;
+            }
+            return topPlayersList;
+        }
 
         //Sends a public message to main portal channel
         public void SendPublicMessage(User user,UMessage message)

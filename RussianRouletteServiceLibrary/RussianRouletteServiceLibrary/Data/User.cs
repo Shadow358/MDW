@@ -22,7 +22,6 @@ namespace RussianRouletteServiceLibrary.Data
             this.Games = new HashSet<Game>();
             this.UMessages = new HashSet<UMessage>();
         }
-    
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -35,7 +34,8 @@ namespace RussianRouletteServiceLibrary.Data
         public string Email { get; set; }
         [DataMember]
         public string Password { get; set; }
-    
+        [DataMember]
+        public int Wins { get; set; }
         [DataMember]
         public virtual ICollection<Game> Games { get; set; }
         [DataMember]

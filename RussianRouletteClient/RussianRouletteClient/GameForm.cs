@@ -36,28 +36,37 @@ namespace RussianRouletteClient
 
         public void PlayerLeft(User user, UMessage message)
         {
-            MessageBox.Show(message.MessageContent);
+            //MessageBox.Show(message.MessageContent);
+            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + message.MessageContent)));
+            
         }
 
         public void PlayerReady(User user)
         {
-            MessageBox.Show(user.NickName + " is ready!");
+            
+            //if(user != gameUser)
+            //Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + "Player " + user.NickName + " is ready to play.")));
+            
         }
 
         public void PlayerLost(User user, UMessage message)
         {
             cylinderCounter = 0;
-            MessageBox.Show(message.MessageContent);
+            //MessageBox.Show(message.MessageContent);
+            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + message.MessageContent)));
+            
         }
 
         public void BulletPlaced(User user, UMessage message)
         {
-            MessageBox.Show(user.NickName + " placed a bullet");
+            //MessageBox.Show(user.NickName + " placed a bullet");
         }
 
         public void CylinderSpun(UMessage message)
         {
-            MessageBox.Show("The cylinder of the revolver has been spun");
+            //MessageBox.Show("The cylinder of the revolver has been spun");
+            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + "The cylinder has been spun.")));
+            
         }
 
         public void RematchRequested(User user, UMessage message)
@@ -68,7 +77,9 @@ namespace RussianRouletteClient
         public void YourTurn(User user, int nextHole)
         {
             cylinderCounter = nextHole;
-            MessageBox.Show(user.NickName + " did not die. Now it's your turn to try your luck.");
+            //MessageBox.Show(user.NickName + " did not die. Now it's your turn to try your luck.");
+            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + user.NickName + " did not die. Now it's your turn to try your luck.")));
+            
         }
 
         #endregion

@@ -46,6 +46,9 @@ namespace RussianRouletteClient.RussianRouletteService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private RussianRouletteClient.RussianRouletteService.UMessage[] UMessagesField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int WinsField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -156,6 +159,19 @@ namespace RussianRouletteClient.RussianRouletteService {
                 if ((object.ReferenceEquals(this.UMessagesField, value) != true)) {
                     this.UMessagesField = value;
                     this.RaisePropertyChanged("UMessages");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Wins {
+            get {
+                return this.WinsField;
+            }
+            set {
+                if ((this.WinsField.Equals(value) != true)) {
+                    this.WinsField = value;
+                    this.RaisePropertyChanged("Wins");
                 }
             }
         }
@@ -454,12 +470,6 @@ namespace RussianRouletteClient.RussianRouletteService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(int gameId, RussianRouletteClient.RussianRouletteService.User user, RussianRouletteClient.RussianRouletteService.UMessage message);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DetermineWinner", ReplyAction="http://tempuri.org/IGame/DetermineWinnerResponse")]
-        void DetermineWinner(int gameId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/DetermineWinner", ReplyAction="http://tempuri.org/IGame/DetermineWinnerResponse")]
-        System.Threading.Tasks.Task DetermineWinnerAsync(int gameId);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGame/Rematch", ReplyAction="http://tempuri.org/IGame/RematchResponse")]
         void Rematch(int gameId);
         
@@ -569,14 +579,6 @@ namespace RussianRouletteClient.RussianRouletteService {
             return base.Channel.SendMessageAsync(gameId, user, message);
         }
         
-        public void DetermineWinner(int gameId) {
-            base.Channel.DetermineWinner(gameId);
-        }
-        
-        public System.Threading.Tasks.Task DetermineWinnerAsync(int gameId) {
-            return base.Channel.DetermineWinnerAsync(gameId);
-        }
-        
         public void Rematch(int gameId) {
             base.Channel.Rematch(gameId);
         }
@@ -651,6 +653,12 @@ namespace RussianRouletteClient.RussianRouletteService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/GetUsersList", ReplyAction="http://tempuri.org/IPortal/GetUsersListResponse")]
         System.Threading.Tasks.Task<string[]> GetUsersListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/ReceiveTopPlayers", ReplyAction="http://tempuri.org/IPortal/ReceiveTopPlayersResponse")]
+        string[] ReceiveTopPlayers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPortal/ReceiveTopPlayers", ReplyAction="http://tempuri.org/IPortal/ReceiveTopPlayersResponse")]
+        System.Threading.Tasks.Task<string[]> ReceiveTopPlayersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -782,6 +790,14 @@ namespace RussianRouletteClient.RussianRouletteService {
         
         public System.Threading.Tasks.Task<string[]> GetUsersListAsync() {
             return base.Channel.GetUsersListAsync();
+        }
+        
+        public string[] ReceiveTopPlayers() {
+            return base.Channel.ReceiveTopPlayers();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> ReceiveTopPlayersAsync() {
+            return base.Channel.ReceiveTopPlayersAsync();
         }
     }
 }

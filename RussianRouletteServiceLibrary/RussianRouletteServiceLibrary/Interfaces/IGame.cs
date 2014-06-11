@@ -76,8 +76,8 @@ namespace RussianRouletteServiceLibrary.Interfaces
         [OperationContract(IsOneWay = true)]
         void SendMessage(int gameId, User user, UMessage message);
 
-        [OperationContract]
-        void DetermineWinner(int gameId);
+        //[OperationContract]
+        //void DetermineWinner(int gameId);
 
         [OperationContract]
         void Rematch(int gameId);

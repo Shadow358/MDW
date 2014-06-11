@@ -24,6 +24,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="ServiceDBModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Wins" ColumnName="Wins" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />

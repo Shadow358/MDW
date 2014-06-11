@@ -46,6 +46,9 @@ namespace RussianRouletteServiceLibrary.Interfaces
         [OperationContract]
         List<string> GetUsersList();
 
+        [OperationContract]
+        List<string> ReceiveTopPlayers();
+
     }
 
     public interface IPortalCallback
