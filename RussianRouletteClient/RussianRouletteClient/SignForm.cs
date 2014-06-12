@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using RussianRouletteClient.RussianRouletteService;
 using System.ServiceModel;
 
+
 namespace RussianRouletteClient
 {
 

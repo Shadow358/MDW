@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RussianRouletteClient.RussianRouletteService;
 using System.ServiceModel;
+using Microsoft.DirectX.AudioVideoPlayback;
+using Microsoft.DirectX;
 
 namespace RussianRouletteClient
 {
@@ -24,7 +27,7 @@ namespace RussianRouletteClient
             //MessageBox.Show(user.NickName + " " + message.MessageContent);
 
             string nickname = user.NickName == gameUser.NickName ? "You" : user.NickName;
-            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add(nickname + " : " + message.MessageContent)));
+            Invoke(new MethodInvoker(() => ChatBox.AppendText(nickname + " : " + message.MessageContent+"\n")));
             
             //lb_ChatBox.Items.Add(nickname + " : " + message.MessageContent);
 
@@ -37,7 +40,7 @@ namespace RussianRouletteClient
         public void PlayerLeft(User user, UMessage message)
         {
             //MessageBox.Show(message.MessageContent);
-            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + message.MessageContent)));
+            Invoke(new MethodInvoker(() => ChatBox.AppendText("[System]" + ": " + message.MessageContent+"\n")));
             
         }
 
@@ -53,8 +56,46 @@ namespace RussianRouletteClient
         {
             cylinderCounter = 0;
             //MessageBox.Show(message.MessageContent);
-            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + message.MessageContent)));
+            Video gameVideo;
+
+            if (user.NickName != gameUser.NickName)
+            {
+                gameVideo = new Video(_wantedPath + "\\Videos\\FireDeadV.wmv");
+                gameVideo.Size = new Size(580, 311);
+                gameVideo.Owner = gb_Game;
+                
+                
+            }
+            else
+            {
+                gameVideo = new Video(_wantedPath + "\\Videos\\FireDead1stPerson.wmv");
+                gameVideo.Size = new Size(580, 311);
+                gameVideo.Owner = gb_Game;
+
+
+
+            }
+            Invoke(new MethodInvoker(() => gameVideo.Play()));
+            Invoke(new MethodInvoker(() => ChatBox.AppendText("[System]" + ": " + message.MessageContent+"\n")));
+
             
+
+
+        }
+
+        public void FireAlive(string nickName)
+        {
+            if (nickName == gameUser.NickName)
+            {
+                gameVideo = new Video(_wantedPath + "\\Videos\\FireAliveV.wmv");
+                gameVideo.Owner = gb_Game;
+            }
+            else
+            {
+                gameVideo = new Video(_wantedPath + "\\Videos\\FireAlive1stPerson.wmv");
+                gameVideo.Owner = gb_Game;
+            }
+            Invoke(new MethodInvoker(() => gameVideo.Play()));
         }
 
         public void BulletPlaced(User user, UMessage message)
@@ -64,9 +105,12 @@ namespace RussianRouletteClient
 
         public void CylinderSpun(UMessage message)
         {
+            gameVideo = new Video(_wantedPath + "\\Videos\\SpinCylinderV.wmv");
+            gameVideo.Owner = gb_Game;
+            Invoke(new MethodInvoker(() => gameVideo.Play()));
             //MessageBox.Show("The cylinder of the revolver has been spun");
-            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + "The cylinder has been spun.")));
-            
+            Invoke(new MethodInvoker(() => ChatBox.AppendText("[System]" + ": " + "The cylinder has been spun.\n")));
+            Invoke(new MethodInvoker(() => btn_Spin.Hide()));
         }
 
         public void RematchRequested(User user, UMessage message)
@@ -78,7 +122,10 @@ namespace RussianRouletteClient
         {
             cylinderCounter = nextHole;
             //MessageBox.Show(user.NickName + " did not die. Now it's your turn to try your luck.");
-            Invoke(new MethodInvoker(() => lb_ChatBox.Items.Add("[System]" + ": " + user.NickName + " did not die. Now it's your turn to try your luck.")));
+            Invoke(new MethodInvoker(() => ChatBox.AppendText("[System]" + ": " + user.NickName + " did not die. Now it's your turn to try your luck.\n")));
+            gameVideo = new Video(_wantedPath + "\\Videos\\PassRevolverV.wmv");
+            gameVideo.Owner = gb_Game;
+            Invoke(new MethodInvoker(() => gameVideo.Play()));
             
         }
 
@@ -90,6 +137,9 @@ namespace RussianRouletteClient
         private InstanceContext _instance = null;
         private User gameUser = null;// = new User(){ Email = "zigm4s@gmail.com", Id = 0, FirstName = "Zigmas", LastName = "Slusnys", NickName = "Ziggy", Password = "test123"};
         private int currentGameId;
+        private static string _wantedPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
+        private Video gameVideo;
+        
 
 
         private int cylinderCounter = 0; 
@@ -101,6 +151,7 @@ namespace RussianRouletteClient
             currentGameId = gameId;
             gameUser = portalUser;
 
+            gameVideo = new Video(_wantedPath + "\\Videos\\FireDead1stPerson.wmv");
             
             if (_gameClient != null)
             {
@@ -123,12 +174,12 @@ namespace RussianRouletteClient
             {
                 _gameClient.Open();
                 _gameClient.Play(currentGameId, gameUser);
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-           
         }
 
         private void btn_Spin_Click(object sender, EventArgs e)

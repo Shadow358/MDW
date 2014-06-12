@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using RussianRouletteServiceLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -139,6 +140,14 @@ namespace RussianRouletteServiceLibrary
                 if (oponent != null)
                 {
                     var otherPlayer = oponent.NickName;
+
+                    foreach (User u in GetCurrentGame(gameId).gameClientsDictionary.Keys)
+                    {
+                        IGameCallback callback = GetCurrentGame(gameId).gameClientsDictionary[u];
+                        callback.FireAlive(otherPlayer);
+                    }
+                    
+                    Thread.Sleep(7000);
                     GetCurrentGame(gameId).gameClientsDictionary.FirstOrDefault(x => x.Key.NickName == otherPlayer).Value.YourTurn(player, holeChosen + 1);
                 }
             }

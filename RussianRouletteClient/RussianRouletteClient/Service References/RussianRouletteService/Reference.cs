@@ -509,6 +509,9 @@ namespace RussianRouletteClient.RussianRouletteService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/YourTurn")]
         void YourTurn(RussianRouletteClient.RussianRouletteService.User user, int nextHole);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGame/FireAlive")]
+        void FireAlive(string nickName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

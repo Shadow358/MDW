@@ -114,6 +114,9 @@ namespace RussianRouletteServiceLibrary.Interfaces
         [OperationContract(IsOneWay = true)]
         void YourTurn(User user, int nextHole);
 
+        [OperationContract(IsOneWay = true)]
+        void FireAlive(string nickName);
+
 
     }
 
