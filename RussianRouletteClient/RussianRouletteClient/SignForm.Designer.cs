@@ -50,7 +50,6 @@
             this.tb_RegEmail = new System.Windows.Forms.TextBox();
             this.tb_RegPassword = new System.Windows.Forms.TextBox();
             this.lbl_RegEmail = new System.Windows.Forms.Label();
-            this.btn_connect = new System.Windows.Forms.Button();
             this.gb_SignIn.SuspendLayout();
             this.gb_SignUp.SuspendLayout();
             this.SuspendLayout();
@@ -114,7 +113,6 @@
             // 
             // gb_SignIn
             // 
-            this.gb_SignIn.Controls.Add(this.btn_connect);
             this.gb_SignIn.Controls.Add(this.lbl_Password);
             this.gb_SignIn.Controls.Add(this.btn_SignUp);
             this.gb_SignIn.Controls.Add(this.tb_Email);
@@ -277,16 +275,6 @@
             this.lbl_RegEmail.TabIndex = 2;
             this.lbl_RegEmail.Text = "Email:";
             // 
-            // btn_connect
-            // 
-            this.btn_connect.Location = new System.Drawing.Point(6, 19);
-            this.btn_connect.Name = "btn_connect";
-            this.btn_connect.Size = new System.Drawing.Size(21, 23);
-            this.btn_connect.TabIndex = 8;
-            this.btn_connect.Text = "c";
-            this.btn_connect.UseVisualStyleBackColor = true;
-            this.btn_connect.Click += new System.EventHandler(this.btn_connect_Click);
-            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,7 +317,6 @@
         private System.Windows.Forms.Label lbl_RegLastname;
         private System.Windows.Forms.TextBox tb_RegFirstname;
         private System.Windows.Forms.Label lbl_RegFirstname;
-        private System.Windows.Forms.Button btn_connect;
     }
 }
 

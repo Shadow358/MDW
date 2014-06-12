@@ -75,8 +75,10 @@ namespace RussianRouletteClient
 
 
             }
+
             Invoke(new MethodInvoker(() => gameVideo.Play()));
             Invoke(new MethodInvoker(() => ChatBox.AppendText("[System]" + ": " + message.MessageContent+"\n")));
+            Invoke(new MethodInvoker(() => btn_Fire.Enabled = false));
 
             
 
@@ -132,12 +134,14 @@ namespace RussianRouletteClient
                 gameVideo = new Video(_wantedPath + "\\Videos\\FireAliveV2.wmv");
                 gameVideo.Owner = gb_Game;
                 Invoke(new MethodInvoker(() => gameVideo.Play()));
+                Invoke(new MethodInvoker(() => btn_Fire.Enabled = true));
             }
             else
             {
                 gameVideo = new Video(_wantedPath + "\\Videos\\FireAlive1stPerson.wmv");
                 gameVideo.Owner = gb_Game;
                 Invoke(new MethodInvoker(() => gameVideo.Play()));
+                Invoke(new MethodInvoker(() => btn_Fire.Enabled = false));
             }
         }
 
