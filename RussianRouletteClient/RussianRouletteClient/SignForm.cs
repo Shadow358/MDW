@@ -120,9 +120,9 @@ namespace RussianRouletteClient
 
         private void btn_SignUp_Click(object sender, EventArgs e)
         {
-            for(int i = 173; i < 462; i++)
+            for(int i = 139; i < 434; i++)
             {
-                this.Size = new Size(319, i);
+                this.Size = new Size(303, i);
             }
         }
 
@@ -171,6 +171,21 @@ namespace RussianRouletteClient
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
+        }
+
+        private void buttonMinimizeForm_Click(object sender, EventArgs e)
+        {
+            this.MinimumSize();
+        }
+
+        private void buttonMaximizeForm_Click(object sender, EventArgs e)
+        {
+            this.MaximumSize();
+        }
+
+        private void buttonCloseForm_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

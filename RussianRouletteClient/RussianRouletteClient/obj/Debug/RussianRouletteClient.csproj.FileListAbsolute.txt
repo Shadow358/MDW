@@ -30,3 +30,12 @@ C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\RussianRouletteCli
 C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.StartForm.resources
 C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.Properties.Resources.resources
 C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.csproj.GenerateResource.Cache
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\bin\Debug\RussianRouletteClient.exe.config
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.exe
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.pdb
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.csprojResolveAssemblyReference.cache
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.GameForm.resources
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.PortalForm.resources
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.StartForm.resources
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.Properties.Resources.resources
+F:\school\hw\year 2\Q4\ProCP\MDW\RussianRouletteClient\RussianRouletteClient\obj\Debug\RussianRouletteClient.csproj.GenerateResource.Cache

@@ -96,6 +96,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config">
       <SubType>Designer</SubType>
@@ -145,6 +146,11 @@
     <None Include="Service References\RussianRouletteService\item.disco" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\signin-back.jpg" />
+    <None Include="Resources\signin2.png" />
+    <None Include="Resources\signup1.png" />
+    <None Include="Resources\no1.png" />
+    <None Include="Resources\yes1.png" />
     <Content Include="Videos\CylinderSpin.wmv" />
     <Content Include="Videos\FireAlive.wmv" />
     <Content Include="Videos\FireDeadLaugh.wmv" />

@@ -251,5 +251,20 @@ namespace RussianRouletteClient
                 }
             }
         }
+
+        private void buttonMinimizeForm_Click(object sender, EventArgs e)
+        {
+            this.MinimumSize();
+        }
+
+        private void buttonMaximizeForm_Click(object sender, EventArgs e)
+        {
+            this.MaximumSize();
+        }
+
+        private void buttonCloseForm_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
