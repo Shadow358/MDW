@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RussianRouletteUnitTest", "
 		{9933DF65-B071-4135-9BA6-235A9B3757BE} = {9933DF65-B071-4135-9BA6-235A9B3757BE}
 	EndProjectSection
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ServiceLibraryModel", "ServiceLibraryModel\ServiceLibraryModel.modelproj", "{A08B73BC-8E87-4C8E-B3A6-BC0D72D9895D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{5FD5A566-0905-4641-BB30-36BE3F73C572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FD5A566-0905-4641-BB30-36BE3F73C572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FD5A566-0905-4641-BB30-36BE3F73C572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A08B73BC-8E87-4C8E-B3A6-BC0D72D9895D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A08B73BC-8E87-4C8E-B3A6-BC0D72D9895D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A08B73BC-8E87-4C8E-B3A6-BC0D72D9895D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A08B73BC-8E87-4C8E-B3A6-BC0D72D9895D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

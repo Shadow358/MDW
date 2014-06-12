@@ -1,69 +1,123 @@
 ﻿using RussianRouletteServiceLibrary.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Web;
 
 namespace RussianRouletteServiceLibrary.Interfaces
 {
-    [DataContract]
-    public class Game
-    {
-        [DataMember]
-        public int _id { get; set; }
+    //[DataContract]
+    //public class Game
+    //{
+    //    [DataMember]
+    //    public int _id { get; set; }
 
-        public User _player1 { get; set; }
-        public User _player2 { get; set; }
+    //    public User _player1 { get; set; }
+    //    public User _player2 { get; set; }
 
-        public List<UMessage> _gameChat;
-        private bool[] _cylinder;
-        public User _winner;
+    //    public List<UMessage> _gameChat;
+    //    public bool[] _cylinder;
+    //    public User _winner;
 
-        public Game(User player1, User player2)
-        {
-            _cylinder = new bool[6];
-            _gameChat = new List<UMessage>();
+    //    public Dictionary<User, IGameCallback> clients = null;
 
-        }
-    }
+    //    public List<User> playerList = null;
 
-    [ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(IGameCallback))]
+    //    public Game(User player1, User player2)
+    //    {
+
+    //        clients = new Dictionary<User, IGameCallback>();
+    //        playerList = new List<User>();
+
+    //        _cylinder = new bool[6];
+    //        _gameChat = new List<UMessage>();
+
+    //    }
+
+    //    public Game()
+    //    {
+    //        clients = new Dictionary<User, IGameCallback>();
+    //        playerList = new List<User>();
+
+    //        _cylinder = new bool[6];
+    //        _gameChat = new List<UMessage>();
+
+    //    }
+
+        
+
+    //    public IGameCallback CurrentCallback
+    //    {
+    //        get
+    //        {
+    //            return OperationContext.Current.
+    //                   GetCallbackChannel<IGameCallback>();
+    //        }
+    //    }
+
+    //    public bool SearchUsersByNickname(string nickname)
+    //    {
+    //        return clients.Keys.Any(c => c.NickName == nickname);
+    //    }
+    //}
+
+    [ServiceContract(SessionMode = SessionMode.Allowed, CallbackContract = typeof(IGameCallback))]
     public interface IGame
     {
         [OperationContract]
-        void Play();
+        void Play(int gameId, User user);
 
         [OperationContract]
-        string PlaceBullet(int cylinderHole);
+        void PlaceBullet(int gameId, int cylinderHole, User user);
 
         [OperationContract]
-        string SpingCylinder();
+        void SpinCylinder(int gameId);
 
         [OperationContract]
-        bool Shoot(User player);
+        bool Shoot(int gameId, User player, int chosenHole);
+
+        [OperationContract(IsOneWay = true)]
+        void SendMessage(int gameId, User user, UMessage message);
+
+        //[OperationContract]
+        //void DetermineWinner(int gameId);
 
         [OperationContract]
-        void SendMessage(UMessage message);
+        void Rematch(int gameId);
 
         [OperationContract]
-        string DetermineWinnder();
+        void Leave(int gameId, User user);
 
-        [OperationContract]
-        string Rematch();
+
     }
 
     public interface IGameCallback
     {
         [OperationContract(IsOneWay = true)]
-        void PlayerSentMessage();
+        void PlayerSentMessage(User user, UMessage message);
 
-        void PlayerDisconnected();
+        [OperationContract(IsOneWay = true)]
+        void PlayerLeft(User user, UMessage message);
 
-        void PlayerReady();
+        [OperationContract(IsOneWay = true)]
+        void PlayerReady(User user);
 
-        void PlayerLost();
+        [OperationContract(IsOneWay = true)]
+        void PlayerLost(User user, UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void BulletPlaced(User user, UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void CylinderSpun(UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void RematchRequested(User user, UMessage message);
+
+        [OperationContract(IsOneWay = true)]
+        void YourTurn(User user, int nextHole);
+
+        [OperationContract(IsOneWay = true)]
+        void FireAlive(string nickName);
+
+
     }
 
 }

@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ServiceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstPlayer" Type="int" Nullable="false" />
+    <Property Name="SecondPlayer" Type="int" Nullable="false" />
+    <Property Name="Winner" Type="int" />
+  </EntityType>
   <EntityType Name="UMessages">
     <Key>
       <PropertyRef Name="Id" />
@@ -19,7 +28,20 @@
     <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Wins" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK__Games__FirstPlay__5CD6CB2B">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Games" Type="Self.Games" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Games">
+        <PropertyRef Name="FirstPlayer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__UMessages__Sende__36B12243">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="UMessages" Type="Self.UMessages" Multiplicity="*" />
@@ -33,8 +55,13 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ServiceDBModelStoreContainer">
+    <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UMessages" EntityType="Self.UMessages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Games__FirstPlay__5CD6CB2B" Association="Self.FK__Games__FirstPlay__5CD6CB2B">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Games" EntitySet="Games" />
+    </AssociationSet>
     <AssociationSet Name="FK__UMessages__Sende__36B12243" Association="Self.FK__UMessages__Sende__36B12243">
       <End Role="Users" EntitySet="Users" />
       <End Role="UMessages" EntitySet="UMessages" />

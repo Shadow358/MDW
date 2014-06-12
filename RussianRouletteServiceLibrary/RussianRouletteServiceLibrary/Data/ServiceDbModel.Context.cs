@@ -25,6 +25,7 @@ namespace RussianRouletteServiceLibrary.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<UMessage> UMessages { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

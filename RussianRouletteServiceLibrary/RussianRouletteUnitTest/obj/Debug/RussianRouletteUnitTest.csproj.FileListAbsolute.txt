@@ -4,3 +4,9 @@ c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibr
 c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\obj\Debug\RussianRouletteUnitTest.dll
 c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\obj\Debug\RussianRouletteUnitTest.pdb
 c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteUnitTest\bin\Debug\RussianRouletteUnitTest.dll.config
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteUnitTest\bin\Debug\RussianRouletteUnitTest.dll.config
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteUnitTest\bin\Debug\RussianRouletteUnitTest.dll
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteUnitTest\bin\Debug\RussianRouletteUnitTest.pdb
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteUnitTest\obj\Debug\RussianRouletteUnitTest.csprojResolveAssemblyReference.cache
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteUnitTest\obj\Debug\RussianRouletteUnitTest.dll
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteUnitTest\obj\Debug\RussianRouletteUnitTest.pdb

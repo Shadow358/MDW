@@ -16,7 +16,18 @@ namespace RussianRouletteClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartForm());
+
+            StartForm startForm = new StartForm();
+            if (startForm.ShowDialog() == DialogResult.OK)
+            {
+                startForm._portalClient.Close();
+                Application.Run(new PortalForm(startForm.currentUser));
+            }
+            else
+            {
+                Application.Exit();
+            }
+            //Application.Run(new PortalForm());
         }
     }
 }

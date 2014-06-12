@@ -11,3 +11,29 @@ c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibr
 c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.pdb
 c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\ServiceDB.mdf
 c:\users\zigm4s\documents\visual studio 2013\Projects\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\ServiceDB_log.ldf
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\Data\ServiceDB.mdf
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\ServiceDB.mdf
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\ServiceDB_log.ldf
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.dll.config
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.dll
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.pdb
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.dll
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.xml
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.dll
+C:\Users\Zigm4s\Documents\Git Projects\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.pdb
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\Data\ServiceDB.mdf
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\ServiceDB.mdf
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\ServiceDB_log.ldf
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.dll.config
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.dll
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\RussianRouletteServiceLibrary.pdb
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.dll
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.xml
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.dll
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.pdb
+C:\Users\Zigmas\Documents\BitBucket\MDW\RussianRouletteServiceLibrary\RussianRouletteServiceLibrary\obj\Debug\RussianRouletteServiceLibrary.csprojResolveAssemblyReference.cache

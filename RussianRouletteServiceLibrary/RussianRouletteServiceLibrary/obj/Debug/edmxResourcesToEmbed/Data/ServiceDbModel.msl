@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ServiceDBModelStoreContainer" CdmEntityContainer="ServiceContext">
+    <EntitySetMapping Name="Games">
+      <EntityTypeMapping TypeName="ServiceDBModel.Game">
+        <MappingFragment StoreEntitySet="Games">
+          <ScalarProperty Name="Winner" ColumnName="Winner" />
+          <ScalarProperty Name="SecondPlayer" ColumnName="SecondPlayer" />
+          <ScalarProperty Name="FirstPlayer" ColumnName="FirstPlayer" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UMessages">
       <EntityTypeMapping TypeName="ServiceDBModel.UMessage">
         <MappingFragment StoreEntitySet="UMessages">
@@ -14,6 +24,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="ServiceDBModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Wins" ColumnName="Wins" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
