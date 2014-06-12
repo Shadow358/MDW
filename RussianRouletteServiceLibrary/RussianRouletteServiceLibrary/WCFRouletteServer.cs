@@ -57,6 +57,18 @@ namespace RussianRouletteServiceLibrary
             }
         }
 
+        public bool isUserOnline(string email)
+        {
+            bool result = false;
+            foreach (var user in portalList)
+            {
+                if (user.Email == email)
+                    result = true;
+                
+            }
+            return result;
+        }
+
         public WCFRouletteServer()
         {
            
@@ -259,7 +271,7 @@ namespace RussianRouletteServiceLibrary
         {
             User userDb = db.Users.FirstOrDefault(x => x.Email == user.Email);
 
-            if (userDb != null && userDb.Password == user.Password)
+            if (userDb != null && userDb.Password == user.Password && !isUserOnline(user.Email))
             {
                 return true;
             }
