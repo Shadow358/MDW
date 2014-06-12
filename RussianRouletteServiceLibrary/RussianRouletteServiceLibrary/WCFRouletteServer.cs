@@ -156,11 +156,11 @@ namespace RussianRouletteServiceLibrary
                     foreach (User u in GetCurrentGame(gameId).gameClientsDictionary.Keys)
                     {
                         IGameCallback callback = GetCurrentGame(gameId).gameClientsDictionary[u];
-                        callback.FireAlive(otherPlayer);
+                        callback.YourTurn(player, holeChosen + 1);
                     }
                     
-                    Thread.Sleep(7000);
-                    GetCurrentGame(gameId).gameClientsDictionary.FirstOrDefault(x => x.Key.NickName == otherPlayer).Value.YourTurn(player, holeChosen + 1);
+                    //Thread.Sleep(7000);
+                    //GetCurrentGame(gameId).gameClientsDictionary.FirstOrDefault(x => x.Key.NickName == otherPlayer).Value.YourTurn(player, holeChosen + 1);
                 }
             }
             else

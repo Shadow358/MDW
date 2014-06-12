@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="c8acab62-7ac6-4b59-aae5-894d52dc5603"
+  name="AudioVideoPlayback"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="b8ae02a4-6c93-44ad-b46e-c0e085bb0d5d"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMicrosoft.DirectX.AudioVideoPlayback"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="4d2e78bd-cbff-4518-b3cb-17aa63bb0d3a"
+        name="Video"
+        isAbstract="false"
+        isLeaf="true"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="336e4981-46d6-4a22-ab1a-125df5a5558f"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FWindows%2Fassembly%2FGAC%2FMicrosoft.DirectX.AudioVideoPlayback%2F1.0.2902.0__31bf3856ad364e35%2FMicrosoft.DirectX.AudioVideoPlayback.dll Namespace%3DMicrosoft.DirectX.AudioVideoPlayback Type%3DVideo"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="df7c301c-0da7-4a7d-9b48-9e86dae1b560"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b4c92b91-8b8b-4b23-b42c-30e9a757256d">
+                <propertyInstance
+                  Id="3b4896be-542e-4bc1-8014-117cbfb62b62"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8b9419b4-9b39-4e96-8489-b6dc63c38ec2">
+                <propertyInstance
+                  Id="48682928-0b64-4494-84fb-e79d16d888d1"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="13245feb-fc27-41ef-acb2-4c47d27c5713">
+                <propertyInstance
+                  Id="81d87f8c-5b82-4d5e-8902-b65d8032cb8d"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="adfde08f-1e49-4771-a420-1e67761b8b0e">
+                <propertyInstance
+                  Id="fb2fdd62-d288-4318-870c-b887c365f4d8"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d32860e2-aea3-4d07-a5d0-f2c22e899cdd">
+                <propertyInstance
+                  Id="ed7b0d5a-665c-4b04-9678-5daa490d659d"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

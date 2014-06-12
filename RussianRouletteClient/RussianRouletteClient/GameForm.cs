@@ -120,13 +120,25 @@ namespace RussianRouletteClient
         
         public void YourTurn(User user, int nextHole)
         {
-            cylinderCounter = nextHole;
-            //MessageBox.Show(user.NickName + " did not die. Now it's your turn to try your luck.");
-            Invoke(new MethodInvoker(() => ChatBox.AppendText("[System]" + ": " + user.NickName + " did not die. Now it's your turn to try your luck.\n")));
-            gameVideo = new Video(_wantedPath + "\\Videos\\PassRevolverV.wmv");
-            gameVideo.Owner = gb_Game;
-            Invoke(new MethodInvoker(() => gameVideo.Play()));
-            
+            if (user.NickName != gameUser.NickName)
+            {
+                cylinderCounter = nextHole;
+                //MessageBox.Show(user.NickName + " did not die. Now it's your turn to try your luck.");
+                Invoke(
+                    new MethodInvoker(
+                        () =>
+                            ChatBox.AppendText("[System]" + ": " + user.NickName +
+                                               " did not die. Now it's your turn to try your luck.\n")));
+                gameVideo = new Video(_wantedPath + "\\Videos\\FireAliveV2.wmv");
+                gameVideo.Owner = gb_Game;
+                Invoke(new MethodInvoker(() => gameVideo.Play()));
+            }
+            else
+            {
+                gameVideo = new Video(_wantedPath + "\\Videos\\FireAlive1stPerson.wmv");
+                gameVideo.Owner = gb_Game;
+                Invoke(new MethodInvoker(() => gameVideo.Play()));
+            }
         }
 
         #endregion

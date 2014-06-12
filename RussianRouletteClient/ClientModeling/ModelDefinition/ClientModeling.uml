@@ -36,6 +36,12 @@
         LastKnownName="System"
         LastKnownLocation="Package2_1215.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="b80ba231-af65-4150-bf44-245a29fda9eb"
+        LastKnownName="Microsoft"
+        LastKnownLocation="Package_1317.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

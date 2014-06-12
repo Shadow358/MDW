@@ -29,7 +29,7 @@
         <referencesInternal>
           <reference
             Id="d3852399-bfe9-4f3d-aa59-fc98e0474911"
-            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FZigm4s%2FDocuments%2FGit Projects%2FMDW%2FRussianRouletteServiceLibrary%2Fpackages%2FEntityFramework.6.1.0%2Flib%2Fnet45%2FEntityFramework.dll&quot; Namespace%3DSystem.Data.Entity Type%3DDbModelBuilder"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FZigmas%2FDocuments%2FBitBucket%2FMDW%2FRussianRouletteServiceLibrary%2Fpackages%2FEntityFramework.6.1.0%2Flib%2Fnet45%2FEntityFramework.dll Namespace%3DSystem.Data.Entity Type%3DDbModelBuilder"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
@@ -165,7 +165,7 @@
         <referencesInternal>
           <reference
             Id="d3acdaac-d919-4c50-84a9-57a524ae7b7d"
-            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FZigm4s%2FDocuments%2FGit Projects%2FMDW%2FRussianRouletteServiceLibrary%2Fpackages%2FEntityFramework.6.1.0%2Flib%2Fnet45%2FEntityFramework.dll&quot; Namespace%3DSystem.Data.Entity Type%3D(Name%3DDbSet GenericParameterCount%3D1)"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FZigmas%2FDocuments%2FBitBucket%2FMDW%2FRussianRouletteServiceLibrary%2Fpackages%2FEntityFramework.6.1.0%2Flib%2Fnet45%2FEntityFramework.dll Namespace%3DSystem.Data.Entity Type%3D(Name%3DDbSet GenericParameterCount%3D1)"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
@@ -223,7 +223,7 @@
                 <referencesInternal>
                   <reference
                     Id="6ec3be58-6d55-458c-adf4-baee2ff15a1e"
-                    handle="viewcode://./CodeSchema_GenericParameter?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FZigm4s%2FDocuments%2FGit Projects%2FMDW%2FRussianRouletteServiceLibrary%2Fpackages%2FEntityFramework.6.1.0%2Flib%2Fnet45%2FEntityFramework.dll&quot; Namespace%3DSystem.Data.Entity Type%3D(Name%3DDbSet GenericParameterCount%3D1) ParameterIdentifier%3D0"
+                    handle="viewcode://./CodeSchema_GenericParameter?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FZigmas%2FDocuments%2FBitBucket%2FMDW%2FRussianRouletteServiceLibrary%2Fpackages%2FEntityFramework.6.1.0%2Flib%2Fnet45%2FEntityFramework.dll Namespace%3DSystem.Data.Entity Type%3D(Name%3DDbSet GenericParameterCount%3D1) ParameterIdentifier%3D0"
                     tag="ViewCode" />
                 </referencesInternal>
                 <ownedParameterableElement>
@@ -328,7 +328,7 @@
         <referencesInternal>
           <reference
             Id="671ff4be-d7a3-45e1-bdd9-d14a5500c461"
-            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FZigm4s%2FDocuments%2FGit Projects%2FMDW%2FRussianRouletteServiceLibrary%2Fpackages%2FEntityFramework.6.1.0%2Flib%2Fnet45%2FEntityFramework.dll&quot; Namespace%3DSystem.Data.Entity Type%3DDbContext"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FZigmas%2FDocuments%2FBitBucket%2FMDW%2FRussianRouletteServiceLibrary%2Fpackages%2FEntityFramework.6.1.0%2Flib%2Fnet45%2FEntityFramework.dll Namespace%3DSystem.Data.Entity Type%3DDbContext"
             tag="ViewCode" />
         </referencesInternal>
         <appliedStereotypesInternal>
@@ -374,6 +374,93 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="41a4366b-fd0a-4b29-9cf6-21b597b8600f">
+            <interfaceMoniker
+              Id="95339aaf-4ac9-4d69-9376-3190518237bf"
+              LastKnownName="IDisposable"
+              LastKnownLocation="Package2_2144.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f31a688d-ccb1-4b89-ac05-9564777ef332"
+        name="DbSet&lt;Game‎&gt;"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="7c740605-aa82-4f91-8b73-d63833a4a7cb"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="846c137e-06d9-4e7a-8658-02dbe01c6127">
+                <propertyInstance
+                  Id="fa7b9492-c473-426a-b4cb-6a7b8b523b3c"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a18d20fd-efc4-47d8-b21f-f7cde0d85cb1">
+                <propertyInstance
+                  Id="2c03a87a-99bb-448d-bda0-a7827529deaf"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e3808932-d9e5-418e-8702-40053fa5aedc">
+                <propertyInstance
+                  Id="29487b04-3a29-4941-b812-5cec66293a1a"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="deb586eb-2daf-4234-a128-955abbe5e427">
+                <propertyInstance
+                  Id="7b6a2306-c5aa-4605-a4e9-08734954324b"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ac5f8519-6c9f-46fe-8b6e-9c3440769a94">
+                <propertyInstance
+                  Id="1b762a49-9a65-4d82-adb4-b2db6ea1a9b8"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <signatures>
+          <templateBinding
+            Id="6a3479a2-6b6d-428b-bfaf-7ada09ad2633">
+            <redefinableTemplateSignatureMoniker
+              Id="79d01876-fa5b-4c8c-a593-db894df10927"
+              LastKnownLocation="Package4_2144.uml" />
+            <relationshipOwnedElementsInternal>
+              <templateBindingHasTemplateParameterSubstitution>
+                <templateParameterSubstitution
+                  Id="2f5d1866-44df-4a09-bf6e-b60bf7bc9463">
+                  <actuals>
+                    <classMoniker
+                      Id="3cfd2fd7-a038-4b65-8d78-fc78f3dd0e43"
+                      LastKnownName="Game"
+                      LastKnownLocation="Package1_2144.uml" />
+                  </actuals>
+                  <formal>
+                    <classifierTemplateParameterMoniker
+                      Id="b6cd06ad-941a-4eec-ad53-9deeb41ae5b9"
+                      LastKnownLocation="Package4_2144.uml" />
+                  </formal>
+                </templateParameterSubstitution>
+              </templateBindingHasTemplateParameterSubstitution>
+            </relationshipOwnedElementsInternal>
+          </templateBinding>
+        </signatures>
       </class>
     </packageHasNamedElement>
   </packagedElements>
